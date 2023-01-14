@@ -1,0 +1,19 @@
+{
+	"name": "miao-nuggets",
+	"private": true,
+	"scripts": {
+		"build": "nuxi build",
+		"dev": "nuxi dev",
+		"start": "nuxi preview"
+	},
+	"engines": {
+		"node": ">=16.x",
+		"pnpm": "=7.25.0"
+	},
+	"devDependencies": {
+		"nuxt": "^3.0.0"
+	},
+	"dependencies": {
+		"@nuxt/ui": "^0.4.0"
+	}
+}
