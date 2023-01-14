@@ -1,0 +1,8 @@
+.output/*
+.nuxt/*
+!.nuxt/nuxt.*
+!.nuxt/tsconfig.json
+
+node_modules/
+
+*.log
