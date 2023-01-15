@@ -2,11 +2,12 @@
 module.exports = {
 	important: '#__nuxt',
 	mode: 'jit',
+	darkMode: 'class',
 	content: [
-		'./components/**/*.{js,vue,ts}',
-		'./layouts/**/*.vue',
-		'./pages/**/*.vue',
-		'./plugins/**/*.{js,ts}',
+		'./components/**/*.{vue,js,jsx,ts,tsx}',
+		'./layouts/**/*.{vue,js,jsx,ts,tsx}',
+		'./pages/**/*.{vue,js,jsx,ts,tsx}',
+		'./plugins/**/*.{js,jsx,ts,tsx}',
 		'./nuxt.config.{js,ts}',
 		'./app.vue',
 	],

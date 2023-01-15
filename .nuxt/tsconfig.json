@@ -61,9 +61,6 @@
       "vue-demi": [
         "node_modules/.pnpm/nuxt@3.0.0/node_modules/nuxt/dist/app/compat/vue-demi"
       ],
-      "#color-mode-options": [
-        ".nuxt/color-mode-options"
-      ],
       "pinia": [
         "node_modules/.pnpm/pinia@2.0.28/node_modules/pinia/dist/pinia"
       ],
