@@ -1,0 +1,7 @@
+{
+	"files.autoSave": "afterDelay",
+	"emmet.includeLanguages": {
+		"postcss": "css"
+	},
+	"css.lint.unknownAtRules": "ignore"
+}

@@ -4,23 +4,30 @@
 	"scripts": {
 		"build": "nuxi build",
 		"dev": "nuxi dev",
-		"start": "nuxi preview"
+		"start": "nuxi preview",
+		"test": "vitest",
+		"coverage": "vitest run --coverage"
 	},
 	"engines": {
 		"node": ">=16.x",
-		"pnpm": "=7.25.0"
+		"pnpm": ">=7.25.0"
 	},
 	"devDependencies": {
+		"@vueuse/nuxt": "^9.10.0",
 		"autoprefixer": "^10.4.13",
 		"nuxt": "^3.0.0",
 		"postcss": "^8.4.21",
 		"tailwindcss": "^3.2.4",
+		"unplugin-auto-import": "^0.12.1",
+		"unplugin-vue-components": "^0.22.12",
 		"vitest": "^0.27.1"
 	},
 	"dependencies": {
 		"@element-plus/icons-vue": "^2.0.10",
 		"@nuxt/ui": "^0.4.0",
 		"@pinia/nuxt": "^0.4.6",
+		"@vitejs/plugin-vue-jsx": "^3.0.0",
+		"@vueuse/core": "^9.10.0",
 		"element-plus": "^2.2.28",
 		"pinia": "^2.0.28"
 	}
