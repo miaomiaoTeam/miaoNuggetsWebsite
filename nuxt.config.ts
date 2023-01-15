@@ -61,4 +61,5 @@ export default defineNuxtConfig({
 			'composables/**',
 		],
 	},
+	build: { transpile: ['element-plus'] },
 })

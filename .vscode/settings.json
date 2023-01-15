@@ -1,5 +1,4 @@
 {
-	"files.autoSave": "afterDelay",
 	"emmet.includeLanguages": {
 		"postcss": "css"
 	},
