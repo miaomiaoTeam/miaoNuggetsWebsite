@@ -3,8 +3,8 @@
 
 .output/*
 .nuxt/*
-!.nuxt/nuxt.*
-!.nuxt/tsconfig.json
+interface/auto-imports.d.ts
+interface/components.d.ts
 
 node_modules/
 
