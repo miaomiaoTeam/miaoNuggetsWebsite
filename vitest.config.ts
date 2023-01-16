@@ -1,5 +1,6 @@
 // vitest.config.ts
 import { resolve } from 'path'
+import Vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vitest/config'
@@ -18,6 +19,7 @@ export default defineConfig({
 		},
 	},
 	plugins: [
+		Vue(),
 		AutoImport({
 			imports: ['vue', '@vueuse/core'],
 			vueTemplate: true,
