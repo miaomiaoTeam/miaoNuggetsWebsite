@@ -14,9 +14,30 @@ export default defineNuxtConfig({
 			viewport: 'width=device-width, initial-scale=1.0',
 			charset: 'utf-8',
 			meta: [],
+			link: [
+				{
+					rel: 'icon',
+					type: 'image/png',
+					sizes: '32x32',
+					href: '/favicons/favicon-32x32.png',
+				},
+				{
+					rel: 'icon',
+					type: 'image/png',
+					sizes: '16x16',
+					href: '/favicons/favicon-16x16.png',
+				},
+				{
+					rel: 'mask-icon',
+					type: 'image/png',
+					href: '/favicons/safari-pinned-tab.svg',
+					color: '#1E80FF',
+				},
+			],
 		},
 	},
 	modules: [
+		'@nuxt/content',
 		'@vueuse/nuxt',
 		[
 			'@pinia/nuxt',
@@ -28,6 +49,7 @@ export default defineNuxtConfig({
 			},
 		],
 	],
+	content: {},
 	css: [
 		'~/assets/css/main.css',
 		'element-plus/theme-chalk/dark/css-vars.css',
@@ -38,6 +60,7 @@ export default defineNuxtConfig({
 		plugins: [
 			VueJSX(),
 			AutoImport({
+				resolvers: [ElementPlusResolver()],
 				imports: ['vue', '@vueuse/core'],
 				dts: './interface/auto-imports.d.ts',
 			}),
