@@ -24,10 +24,11 @@
 ├─nuxt.config.ts          nuxt应用配置文件
 ├─tsconfig.json           ts配置文件
 │
-├─docs                    项目文档
-│  ├─svg                  文档使用的svg目录
-│  │  └─...
-│  └─项目简介.md
+├─content                 文档目录
+│  ├─docs                 项目文档
+│     ├─svg               文档使用的svg目录
+│     │  └─...
+│     └─项目简介.md
 │
 ├─node_modules            依赖文件目录
 ├─.gitignore              git忽略文件
@@ -41,14 +42,12 @@
 
 ## 其他结构
 
-- [组件目录结构](组件目录结构.md)
+- [组件目录结构](/content/docs/structures/components)
 
-- [Hooks目录结构](Hooks目录结构.md)
+- [Hooks目录结构](/content/docs/structures/hooks)
 
-- [布局目录结构](布局目录结构.md)
+- [布局目录结构](/content/docs/structures/layouts)
 
-- [路由中间件结构](路由中间件结构.md)
+- [工具函数目录结构](/content/docs/structures/utils)
 
-- [工具函数目录结构](工具函数目录结构.md)
-
-- [API接口文档](API接口文档.md)
+- [API接口文档](/content/docs/structures/apis)

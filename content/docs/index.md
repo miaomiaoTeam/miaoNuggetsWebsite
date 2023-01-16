@@ -1,12 +1,12 @@
 # 参考文档
 
 <img
-src="./svg/nuxt3.svg"
+src="/svg/nuxt3.svg"
 width="16" />
 [**Nuxt3 文档**](https://nuxt.com/ "Nuxt3英文文档")
 
 <img
-src="./svg/vue3.svg"
+src="/svg/vue3.svg"
 width="16" />
 [**Vue3 文档**](https://cn.vuejs.org/ "Vue3中文文档")
 
@@ -31,7 +31,7 @@ width="16" />
 [**Pinia 文档**](https://pinia.vuejs.org/zh/ "Pinia中文文档")
 
 <img
-src="./svg/tailwindcss.svg"
+src="/svg/tailwindcss.svg"
 width="16" />
 [**TailWindCSS 文档**](https://www.tailwindcss.cn/docs "TailWindCSS中文文档 更新有延迟")
 

@@ -1,3 +1,4 @@
+import { resolve } from 'path'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
@@ -49,13 +50,13 @@ export default defineNuxtConfig({
 			},
 		],
 	],
-	content: {},
-	css: [
-		'~/assets/css/main.css',
-		'element-plus/theme-chalk/dark/css-vars.css',
-		'element-plus/es/components/message/style/css',
-		'element-plus/es/components/message-box/style/css',
-	],
+	// @ts-ignore
+	content: {
+		highlight: {
+			preload: ['javascript', 'typescript', 'vue', 'vue-html'],
+		},
+	},
+	css: ['~/assets/css/main.css'],
 	vite: {
 		plugins: [
 			VueJSX(),
@@ -83,5 +84,5 @@ export default defineNuxtConfig({
 			'composables/**',
 		],
 	},
-	build: { transpile: ['element-plus'] },
+	build: { transpile: ['element-plus/es'] },
 })
