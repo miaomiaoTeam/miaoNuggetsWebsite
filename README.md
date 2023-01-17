@@ -1,2 +1,7 @@
-# miaoNuggetsWebsite
-Based on the Vue.js and Nuxt.js developed an imitation of the Nuggets website.
+# 喵队仿掘金官网项目文档
+
+[项目结构](structures/项目结构)
+
+[项目规范](standards/项目规范)
+
+[参考文档](参考文档)

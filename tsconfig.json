@@ -1,7 +1,0 @@
-{
-	"compilerOptions": {
-		"types": ["vitest/globals", "element-plus/global"],
-		"typeRoots": ["./interface"]
-	},
-	"extends": "./.nuxt/tsconfig.json"
-}
