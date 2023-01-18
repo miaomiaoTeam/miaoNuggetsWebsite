@@ -16,6 +16,7 @@
 	"devDependencies": {
 		"@nuxt/content": "^2.3.0",
 		"@nuxt/test-utils-edge": "3.0.1-rc.0-27894335.0db3c63",
+		"@nuxtjs/tailwindcss": "^6.2.0",
 		"@tailwindcss/typography": "^0.5.9",
 		"@vitest/ui": "^0.27.1",
 		"@vue/test-utils": "^2.2.7",

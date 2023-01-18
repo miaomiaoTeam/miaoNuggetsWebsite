@@ -68,7 +68,7 @@ export default defineNuxtConfig({
 				dts: './interface/auto-imports.d.ts',
 			}),
 			Components({
-				resolvers: [ElementPlusResolver()],
+				resolvers: [ElementPlusResolver({ ssr: true })],
 				dts: './interface/components.d.ts',
 			}),
 		],
