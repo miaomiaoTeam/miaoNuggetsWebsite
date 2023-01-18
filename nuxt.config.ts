@@ -1,3 +1,4 @@
+import { resolve } from 'path'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
@@ -7,9 +8,6 @@ export default defineNuxtConfig({
 	typescript: {
 		shim: false,
 		strict: true,
-	},
-	alias: {
-		'server-utils': 'server/utils',
 	},
 	app: {
 		head: {
@@ -83,7 +81,7 @@ export default defineNuxtConfig({
 		dirs: [
 			'composables',
 			'composables/*/index.{ts,js,tsx,jsx,mjs,mts}',
-			'./utils',
+			'composables/**',
 		],
 	},
 	build: { transpile: ['element-plus/es'] },
