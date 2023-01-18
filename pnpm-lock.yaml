@@ -13,7 +13,7 @@ specifiers:
   '@vueuse/core': ^9.10.0
   '@vueuse/nuxt': ^9.10.0
   autoprefixer: ^10.4.13
-  element-plus: 2.2.17
+  element-plus: ^2.2.28
   jsdom: ^21.0.0
   nuxt: ^3.0.0
   pinia: ^2.0.28
@@ -28,7 +28,7 @@ dependencies:
   '@pinia/nuxt': 0.4.6
   '@vitejs/plugin-vue-jsx': 3.0.0
   '@vueuse/core': 9.10.0
-  element-plus: 2.2.17
+  element-plus: 2.2.28
   pinia: 2.0.28
 
 devDependencies:
@@ -2419,8 +2419,8 @@ packages:
   /electron-to-chromium/1.4.284:
     resolution: {integrity: sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==}
 
-  /element-plus/2.2.17:
-    resolution: {integrity: sha512-MGwMIE/q+FFD3kgS23x8HIe5043tmD1cTRwjhIX9o6fim1avFnUkrsfYRvybbz4CkyqSb185EheZS5AUPpXh2g==}
+  /element-plus/2.2.28:
+    resolution: {integrity: sha512-BsxF7iEaBydmRfw1Tt++EO9jRBjbtJr7ZRIrnEwz4J3Cwa1IzHCNCcx3ZwcYTlJq9CYFxv94JnbNr1EbkTou3A==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
