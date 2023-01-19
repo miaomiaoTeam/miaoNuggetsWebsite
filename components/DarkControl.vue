@@ -16,16 +16,16 @@
 </template>
 
 <script lang="ts" setup>
-import { Moon, Sunny } from "@element-plus/icons-vue";
+import { Moon, Sunny } from '@element-plus/icons-vue'
 withDefaults(
   defineProps<{
-    type?: "button" | "switch";
-    circle?: boolean;
+    type?: 'button' | 'switch'
+    circle?: boolean
   }>(),
-  { type: "button", circle: true }
-);
+  { type: 'button', circle: true }
+)
 
-const { is_dark, toggle_dark } = useDarkControl();
+const { is_dark, toggle_dark } = useDarkControl()
 
-onMounted(() => console.log("6666"));
+onMounted(() => console.log('6666'))
 </script>

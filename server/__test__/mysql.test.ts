@@ -1,7 +1,7 @@
-import { mysql } from "server-utils/mysql";
+import { mysql } from 'server-utils/mysql'
 
-describe("mysql connect", () => {
-  test("test", () => {
-    expect(mysql()).toBe("mysql");
-  });
-});
+describe('mysql connect', () => {
+  test('test', () => {
+    expect(mysql()).toBe('mysql')
+  })
+})

@@ -16,14 +16,14 @@
 </template>
 
 <script lang="ts" setup>
-const route = useRoute();
+const route = useRoute()
 
 const doc_path = computed(() => {
-  const path = route.path.replace("/content", "");
-  if (!path) return "/";
-  return path;
-});
-watchEffect(() => console.log(doc_path.value));
+  const path = route.path.replace('/content', '')
+  if (!path) return '/'
+  return path
+})
+watchEffect(() => console.log(doc_path.value))
 </script>
 
 <style lang="postcss" scoped>
