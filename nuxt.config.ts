@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     strict: true,
   },
   alias: {
-	'server-utils': 'server/utils',
+    "server-utils": "server/utils",
   },
   app: {
     head: {
@@ -85,7 +85,7 @@ export default defineNuxtConfig({
       "composables",
       "composables/*/index.{ts,js,tsx,jsx,mjs,mts}",
       "composables/**",
-	  './utils',
+      "./utils",
     ],
   },
   build: { transpile: ["element-plus/es"] },

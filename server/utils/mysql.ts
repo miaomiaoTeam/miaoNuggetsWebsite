@@ -1,1 +1,1 @@
-export const mysql = () => 'mysql'
+export const mysql = () => "mysql";
