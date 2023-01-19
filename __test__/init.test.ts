@@ -8,6 +8,7 @@ describe('这只是一个测试', () => {
   test('ElButton', () => {
     const button = shallowMount(ElButton, { slots: { default: 'Button' } })
     console.log(button)
+    console.log(button)
 
     expect(button.text()).toBe('Button')
   })
