@@ -43,7 +43,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/content',
     '@vueuse/nuxt',
-    '@nuxtjs/eslint-module',
+    // https://github.com/nuxt-community/eslint-module/issues/78
+    // '@nuxtjs/eslint-module',
     [
       '@pinia/nuxt',
       {
