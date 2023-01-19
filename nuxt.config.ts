@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   typescript: {
     shim: false,
     strict: true,
+    typeCheck: true,
   },
   alias: {
     "server-utils": "server/utils",
@@ -62,6 +63,7 @@ export default defineNuxtConfig({
   css: ["~/assets/css/main.css"],
   vite: {
     plugins: [
+      "vite-plugin-eslint",
       VueJSX(),
       AutoImport({
         resolvers: [ElementPlusResolver()],
