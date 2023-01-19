@@ -1,7 +1,8 @@
 {
-	"emmet.includeLanguages": {
-		"postcss": "css"
-	},
-	"css.lint.unknownAtRules": "ignore",
-	"eslint.packageManager": "pnpm"
+  "emmet.includeLanguages": {
+    "postcss": "css"
+  },
+  "css.lint.unknownAtRules": "ignore",
+  "eslint.packageManager": "pnpm",
+  "editor.formatOnSave": true
 }
