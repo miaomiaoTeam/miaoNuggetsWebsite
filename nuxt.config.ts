@@ -8,6 +8,9 @@ export default defineNuxtConfig({
     shim: false,
     strict: true,
   },
+  alias: {
+	'server-utils': 'server/utils',
+  },
   app: {
     head: {
       title: "喵队掘金官网",
@@ -82,6 +85,7 @@ export default defineNuxtConfig({
       "composables",
       "composables/*/index.{ts,js,tsx,jsx,mjs,mts}",
       "composables/**",
+	  './utils',
     ],
   },
   build: { transpile: ["element-plus/es"] },
