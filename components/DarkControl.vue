@@ -11,7 +11,7 @@
     :active-icon="Moon"
     :inactive-icon="Sunny"
     :model-value="is_dark"
-    @update:modelValue="(val) => toggle_dark(Boolean(val))"
+    @update:model-value="(val) => toggle_dark(Boolean(val))"
   />
 </template>
 
