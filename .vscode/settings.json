@@ -4,5 +4,8 @@
   },
   "css.lint.unknownAtRules": "ignore",
   "eslint.packageManager": "pnpm",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  }
 }
