@@ -41,6 +41,7 @@ export default defineNuxtConfig({
     },
   },
   modules: [
+    '@nuxtjs/tailwindcss',
     '@nuxt/content',
     '@vueuse/nuxt',
     // https://github.com/nuxt-community/eslint-module/issues/78
