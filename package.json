@@ -16,6 +16,7 @@
     "pnpm": ">=7.25.0"
   },
   "devDependencies": {
+    "@element-plus/nuxt": "^1.0.2",
     "@nuxt/content": "^2.3.0",
     "@nuxt/test-utils-edge": "3.0.1-rc.0-27894335.0db3c63",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",

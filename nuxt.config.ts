@@ -1,6 +1,3 @@
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import VueJSX from '@vitejs/plugin-vue-jsx'
 import ESLint from 'vite-plugin-eslint'
 
@@ -65,19 +62,7 @@ export default defineNuxtConfig({
     },
   },
   vite: {
-    plugins: [
-      ESLint(),
-      VueJSX(),
-      AutoImport({
-        resolvers: [ElementPlusResolver()],
-        imports: ['vue', '@vueuse/core'],
-        dts: './interface/auto-imports.d.ts',
-      }),
-      Components({
-        resolvers: [ElementPlusResolver({ ssr: true })],
-        dts: './interface/components.d.ts',
-      }),
-    ],
+    plugins: [ESLint(), VueJSX()],
   },
   postcss: {
     plugins: {
