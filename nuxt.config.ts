@@ -1,4 +1,3 @@
-import VueJSX from '@vitejs/plugin-vue-jsx'
 import ESLint from 'vite-plugin-eslint'
 
 export default defineNuxtConfig({
@@ -62,7 +61,7 @@ export default defineNuxtConfig({
     },
   },
   vite: {
-    plugins: [ESLint(), VueJSX()],
+    plugins: [ESLint()],
   },
   postcss: {
     plugins: {
