@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "nuxi build",
     "dev": "nuxi dev",
+    "build": "nuxi build",
+    "analyze": "nuxi analyze",
     "start": "nuxi preview",
     "test": "vitest --ui",
     "coverage": "vitest run --coverage",
@@ -51,3 +52,4 @@
     "pinia": "^2.0.28"
   }
 }
+
