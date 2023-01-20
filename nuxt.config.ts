@@ -2,6 +2,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import VueJSX from '@vitejs/plugin-vue-jsx'
+import ESLint from 'vite-plugin-eslint'
 
 export default defineNuxtConfig({
   typescript: {
@@ -44,6 +45,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxt/content',
     '@vueuse/nuxt',
+    '@element-plus/nuxt',
     // https://github.com/nuxt-community/eslint-module/issues/78
     // '@nuxtjs/eslint-module',
     [
@@ -64,7 +66,7 @@ export default defineNuxtConfig({
   },
   vite: {
     plugins: [
-      'vite-plugin-eslint',
+      ESLint(),
       VueJSX(),
       AutoImport({
         resolvers: [ElementPlusResolver()],
