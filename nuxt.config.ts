@@ -61,7 +61,6 @@ export default defineNuxtConfig({
       preload: ['javascript', 'typescript', 'vue', 'vue-html'],
     },
   },
-  css: ['~/assets/css/main.css'],
   vite: {
     plugins: [
       'vite-plugin-eslint',
@@ -79,7 +78,6 @@ export default defineNuxtConfig({
   },
   postcss: {
     plugins: {
-      tailwindcss: {},
       autoprefixer: {},
     },
   },
