@@ -1,4 +1,5 @@
 import ESLint from 'vite-plugin-eslint'
+import Compression from 'compression-webpack-plugin'
 
 export default defineNuxtConfig({
   typescript: {
@@ -76,5 +77,29 @@ export default defineNuxtConfig({
       './utils',
     ],
   },
-  build: { transpile: ['element-plus/es'] },
+  build: {
+    analyze: {
+      title: 'miaoNuggets',
+      filename: '.output/stats.{name}.html',
+      open: true,
+      template: 'treemap',
+      gzipSize: true,
+      brotliSize: true,
+    },
+  },
+  webpack: {
+    plugins: [
+      new Compression({
+        test: /\.js$|\.html$|\.css$/,
+        threshold: 10240,
+        deleteOriginalAssets: false,
+      }),
+    ],
+    optimization: {
+      splitChunks: {
+        minSize: 10000,
+        maxSize: 250000,
+      },
+    },
+  },
 })

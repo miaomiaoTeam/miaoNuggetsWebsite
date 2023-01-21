@@ -26,6 +26,7 @@
     "@vitest/ui": "^0.27.1",
     "@vueuse/nuxt": "^9.10.0",
     "autoprefixer": "^10.4.13",
+    "compression-webpack-plugin": "^10.0.0",
     "eslint": "^8.32.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-nuxt": "^4.0.0",
