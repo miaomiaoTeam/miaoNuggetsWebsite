@@ -1,5 +1,6 @@
 <template>
     123
+    456
 </template>
 <script setup lang="ts">
 </script>
