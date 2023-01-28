@@ -1,7 +1,5 @@
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import VueJSX from '@vitejs/plugin-vue-jsx'
+import ESLint from 'vite-plugin-eslint'
+import Compression from 'compression-webpack-plugin'
 
 export default defineNuxtConfig({
   typescript: {
@@ -44,6 +42,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxt/content',
     '@vueuse/nuxt',
+    '@element-plus/nuxt',
     // https://github.com/nuxt-community/eslint-module/issues/78
     // '@nuxtjs/eslint-module',
     [
@@ -63,19 +62,7 @@ export default defineNuxtConfig({
     },
   },
   vite: {
-    plugins: [
-      'vite-plugin-eslint',
-      VueJSX(),
-      AutoImport({
-        resolvers: [ElementPlusResolver()],
-        imports: ['vue', '@vueuse/core'],
-        dts: './interface/auto-imports.d.ts',
-      }),
-      Components({
-        resolvers: [ElementPlusResolver({ ssr: true })],
-        dts: './interface/components.d.ts',
-      }),
-    ],
+    plugins: [ESLint()],
   },
   postcss: {
     plugins: {
@@ -90,5 +77,29 @@ export default defineNuxtConfig({
       './utils',
     ],
   },
-  build: { transpile: ['element-plus/es'] },
+  build: {
+    analyze: {
+      title: 'miaoNuggets',
+      filename: '.output/stats.{name}.html',
+      open: true,
+      template: 'treemap',
+      gzipSize: true,
+      brotliSize: true,
+    },
+  },
+  webpack: {
+    plugins: [
+      new Compression({
+        test: /\.js$|\.html$|\.css$/,
+        threshold: 10240,
+        deleteOriginalAssets: false,
+      }),
+    ],
+    optimization: {
+      splitChunks: {
+        minSize: 10000,
+        maxSize: 250000,
+      },
+    },
+  },
 })
