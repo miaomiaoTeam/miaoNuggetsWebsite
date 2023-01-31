@@ -1,12 +1,13 @@
 <template>
-  <div class="mavonEditor">
+  <div class="w-full">
     <mavon-editor
       v-model="handbook"
-      navigation
       default-open="preview"
       :toolbars-flag="false"
       :editable="false"
       :subfield="false"
+      box-shadow-style="0 0 #0000"
+      preview-background="#ffffff"
     />
   </div>
 </template>
@@ -18,9 +19,4 @@ import preview from '@/content/docs/standards/git.md?raw'
 const handbook = ref(preview)
 </script>
 
-<style scoped>
-.mavonEditor {
-  width: 100%;
-  height: 100%;
-}
-</style>
+<style scoped></style>
