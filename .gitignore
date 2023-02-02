@@ -8,4 +8,5 @@ interface/components.d.ts
 
 node_modules/
 
+coverage/
 *.log

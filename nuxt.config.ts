@@ -1,6 +1,8 @@
+import { fileURLToPath } from 'url'
 import ESLint from 'vite-plugin-eslint'
 import Compression from 'compression-webpack-plugin'
 
+const resolve = (url: string) => fileURLToPath(new URL(url, import.meta.url))
 export default defineNuxtConfig({
   typescript: {
     shim: false,
@@ -8,7 +10,7 @@ export default defineNuxtConfig({
     typeCheck: true,
   },
   alias: {
-    'server-utils': 'server/utils',
+    'server-utils': resolve('./server/utils'),
   },
   app: {
     head: {

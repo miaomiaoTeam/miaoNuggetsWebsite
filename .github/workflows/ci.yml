@@ -1,0 +1,56 @@
+name: 'ci'
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - develop
+
+permissions:
+  contents: read # to fetch code (actions/checkout)
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+
+      - name: Set node version to 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - run: PUPPETEER_SKIP_DOWNLOAD=1 pnpm install
+
+      - name: Prepare nuxt environment
+        run: pnpm nuxi prepare
+
+      - name: Run unit tests
+        run: pnpm run test-unit
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+
+      - name: Set node version to 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - run: PUPPETEER_SKIP_DOWNLOAD=1 pnpm install
+
+      - name: Prepare nuxt environment
+        run: pnpm nuxi prepare
+
+      - name: Run eslint
+        run: pnpm run lint

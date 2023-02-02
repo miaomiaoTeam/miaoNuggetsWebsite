@@ -2,15 +2,18 @@
   "name": "miao-nuggets",
   "version": "0.0.0",
   "private": true,
+  "packageManager": "pnpm@7.25.0",
   "scripts": {
     "dev": "nuxi dev",
     "build": "nuxi build",
     "analyze": "nuxi analyze",
     "start": "nuxi preview",
-    "test": "vitest --ui",
-    "coverage": "vitest run --coverage",
+    "test": "vitest",
+    "test-unit": "vitest run -c vitest.unit.config.ts",
+    "test-coverage": "vitest run -c vitest.unit.config.ts --coverage",
     "lint": "eslint --ext \".ts,.js,.vue\" --ignore-path .gitignore .",
-    "lint:fix": "eslint --ext \".ts,.js,.vue\" --ignore-path .gitignore . --fix"
+    "lint:fix": "eslint --ext \".ts,.js,.vue\" --ignore-path .gitignore . --fix",
+    "preinstall": "node ./scripts/preinstall.mjs"
   },
   "engines": {
     "node": ">=16.x",
@@ -23,6 +26,7 @@
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@nuxtjs/tailwindcss": "^6.2.0",
     "@tailwindcss/typography": "^0.5.9",
+    "@vitest/coverage-c8": "^0.28.3",
     "@vitest/ui": "^0.27.1",
     "@vueuse/nuxt": "^9.10.0",
     "autoprefixer": "^10.4.13",
@@ -47,6 +51,7 @@
     "@nuxt/test-utils": "^3.0.0",
     "@nuxtjs/eslint-module": "^3.1.0",
     "@pinia/nuxt": "^0.4.6",
+    "@vue/test-utils": "^2.2.8",
     "@vueuse/core": "^9.10.0",
     "element-plus": "2.2.17",
     "mavon-editor": "3.0.0-beta",
