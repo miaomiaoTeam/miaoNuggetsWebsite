@@ -6,7 +6,6 @@ describe('这只是一个测试', () => {
 
   test('ElButton', () => {
     const button = shallowMount(ElButton)
-    console.log(button)
     expect(button.text()).toBe('')
   })
 })
