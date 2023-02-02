@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url'
 import Vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-import { defineConfig } from 'vitest/config'
+import { defineConfig, UserConfig } from 'vitest/config'
 
 const resolve = (url: string) => fileURLToPath(new URL(url, import.meta.url))
 export default defineConfig({
@@ -34,4 +34,4 @@ export default defineConfig({
       dts: false,
     }),
   ],
-})
+}) as UserConfig

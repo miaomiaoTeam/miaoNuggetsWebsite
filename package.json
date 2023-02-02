@@ -7,8 +7,9 @@
     "build": "nuxi build",
     "analyze": "nuxi analyze",
     "start": "nuxi preview",
-    "test": "vitest --ui",
-    "coverage": "vitest run --coverage",
+    "test": "vitest",
+    "test-unit": "vitest run -c vitest.unit.config.ts",
+    "test-coverage": "vitest run -c vitest.unit.config.ts --coverage",
     "lint": "eslint --ext \".ts,.js,.vue\" --ignore-path .gitignore .",
     "lint:fix": "eslint --ext \".ts,.js,.vue\" --ignore-path .gitignore . --fix",
     "preinstall": "node ./scripts/preinstall.mjs"
