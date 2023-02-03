@@ -11,5 +11,4 @@ pnpm-lock.yaml
 
 coverage/
 *.log
-
-server/config
+.env
