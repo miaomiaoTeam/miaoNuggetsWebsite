@@ -1,14 +1,15 @@
 <template>
   <div class="w-full">
-    <mavon-editor
-      v-model="handbook"
-      default-open="preview"
-      :toolbars-flag="false"
-      :editable="false"
-      :subfield="false"
-      box-shadow-style="0 0 #0000"
-      preview-background="#ffffff"
-    />
+    <client-only>
+      <mavon-editor
+        v-model="handbook"
+        default-open="preview"
+        :toolbars-flag="false"
+        :editable="false"
+        :subfield="false"
+        box-shadow-style="0 0 #0000"
+        preview-background="#ffffff"
+    /></client-only>
   </div>
 </template>
 
