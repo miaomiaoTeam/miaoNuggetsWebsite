@@ -1,6 +1,8 @@
 <template>
   <ElConfigProvider :locale="zhCn">
-    <NuxtPage />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </ElConfigProvider>
 </template>
 
