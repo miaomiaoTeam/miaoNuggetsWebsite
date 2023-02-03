@@ -1,6 +1,9 @@
 <template>
   <NuxtWelcome></NuxtWelcome>
-  <!-- <div><PagePreview /></div> -->
 </template>
-
+<script>
+export default {
+  layout: 'custom',
+}
+</script>
 <script lang="ts" setup></script>
