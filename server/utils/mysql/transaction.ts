@@ -104,7 +104,7 @@ export class Transaction {
               .map(([key, val]) => `\n-\t${key}: ${val}`)
               .join('')
           )
-          await this.rollback('查询出现破坏性错误')
+          await this.rollback('查询出现破坏性错误 ' + err.sqlMessage)
           reject(err)
         } else {
           pool.refresh()
