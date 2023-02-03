@@ -1,6 +1,6 @@
 import type { Pool, PoolConnection } from 'mysql'
 import { createPool } from 'mysql'
-import MySQLConfig from '../../config/mysql.json'
+import MySQLConfig from '../../config/mysql'
 import { useDBG } from './log'
 
 const dbg = useDBG(true)
@@ -70,4 +70,5 @@ export class PoolManager {
   static MAX_FREE_TIME = 10 * 60 * 1000
 }
 
+console.log(MySQLConfig)
 export const pool = new PoolManager(MySQLConfig)
