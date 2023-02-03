@@ -10,5 +10,4 @@ node_modules/
 
 coverage/
 *.log
-
-server/config
+.env

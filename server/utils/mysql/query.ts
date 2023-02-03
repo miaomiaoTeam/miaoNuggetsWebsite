@@ -12,7 +12,7 @@ export const query = <T extends Record<string, any> | unknown = unknown>(
       const log = console.draft(getTilte().toString(), '启用了一条链接')
       conn.query(sql, values, (err, results) => {
         if (err) {
-          log(getTilte().toString(), '查询错误', err)
+          log(getTilte().toString(), '查询错误', err.sqlMessage)
           recordError(err)
           return reject(err)
         }

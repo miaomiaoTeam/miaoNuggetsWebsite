@@ -16,6 +16,7 @@ export default defineConfig({
     deps: {
       inline: ['@nuxt/test-utils-edge'],
     },
+    setupFiles: ['scripts/setupVitest.ts'],
   },
   resolve: {
     alias: {
