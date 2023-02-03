@@ -71,6 +71,7 @@
         </ul>
       </nav>
     </header>
+    <slot />
   </div>
 </template>
 <script setup lang="ts">
@@ -119,13 +120,12 @@ const show = () => {
    
     padding: 0.667rem;
 } */
-
+/* 以下的代码为了简便我暂时这样写了 */
 .icon {
   fill: #515767;
   transform: rotate(0deg);
   transition: transform 0.2s ease-in-out;
 }
-/* 如何改变svg颜色 */
 .icon.active {
   fill: currentColor;
   color: #1e80ff;
