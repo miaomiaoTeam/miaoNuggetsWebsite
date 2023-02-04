@@ -5,12 +5,7 @@
       <ul>
         <li v-for="(item, index) in panelList_pc" :key="index">
           <div v-if="item.type === 'badge'">
-            <el-badge
-              :value="item.count"
-              class="item"
-              type="primary"
-              :max="199"
-            >
+            <el-badge :value="item.data" class="item" type="primary" :max="199">
               <el-button class="btn">
                 <img :src="item.src ?? ''" class="w-8"
               /></el-button>
@@ -24,11 +19,18 @@
     </div>
   </div>
   <!-- 移动端 -->
-  <div class="block postLep:hidden postDes:hidden">
-    <div class="fixed flex bottom-0 justify-between">
-      <div>123</div>
-      <div>456</div>
-      <div>789</div>
+  <div class="block postLep:hidden">
+    <div
+      class="fixed bottom-0 flex justify-around items-center w-full z-10 px-6 bg-white h-12"
+    >
+      <div v-for="(item, index) in panelList" :key="index">
+        <el-button text class="flex justify-center items-center">
+          <img :src="item.src ?? ''" alt="" class="h-6" />
+          <span class="text-sm font-medium text-[#8a93a0]">{{
+            item.data
+          }}</span>
+        </el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -36,24 +38,24 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 interface panelListOption {
-  type: 'badge' | 'divider'
+  type: 'badge' | 'divider' | 'text'
   src: string
-  count?: number
+  data?: number | string
 }
 const panelList_pc = ref<panelListOption[]>([
-  { src: '/svg/page_zan_pc.svg', type: 'badge', count: 10 },
-  { src: '/svg/page_comment_pc.svg', type: 'badge', count: 178 },
+  { src: '/svg/page_zan_pc.svg', type: 'badge', data: 10 },
+  { src: '/svg/page_comment_pc.svg', type: 'badge', data: 178 },
   { src: '/svg/page_collect_pc.svg', type: 'badge' },
-  { src: '/svg/page_share.svg_pc', type: 'badge' },
+  { src: '/svg/page_share_pc.svg', type: 'badge' },
   { src: '', type: 'divider' },
   { src: '/svg/page_report_pc.svg', type: 'badge' },
   { src: '/svg/page_immerse_pc.svg', type: 'badge' },
 ])
-// const panelList = ref([
-//   { src: '/svg/page_zan.svg', count: 10 },
-//   { src: '/svg/page_comment.svg', count: 178 },
-//   { src: '/svg/page_collect.svg' },
-// ])
+const panelList = ref<panelListOption[]>([
+  { src: '/svg/page_zan.svg', type: 'badge', data: 10 },
+  { src: '/svg/page_comment.svg', type: 'badge', data: 178 },
+  { src: '/svg/page_collect.svg', type: 'text', data: '收藏' },
+])
 </script>
 <style scoped>
 .btn {

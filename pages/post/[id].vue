@@ -1,23 +1,35 @@
 <template>
   <div class="bg-[#f4f5f5] pt-[21px]">
-    <div class="flex max-w-[1140px] mx-auto postLep:gap-5">
-      <!-- 悬浮panel -->
-      <div class="postDes:mr-[-20px]">
-        <postDetailSuspendPanel />
-      </div>
-      <!-- 文章详情 -->
-      <div class="flex-1 postDes:ml-[90px]">
-        <postDetailContent></postDetailContent>
-      </div>
-      <!-- 右侧栏 -->
-      <div>
-        <!-- <post-detail-author></post-detail-author>
+    <!-- pc端 -->
+    <div class="hidden postLep:block">
+      <div class="flex max-w-[1140px] mx-auto postLep:gap-5">
+        <!-- 悬浮panel -->
+        <div class="postDes:mr-[-20px]">
+          <postDetailSuspendPanel />
+        </div>
+        <!-- 文章详情 -->
+        <div class="flex-1 postDes:ml-[90px]">
+          <postDetailContent></postDetailContent>
+        </div>
+        <!-- 右侧栏 -->
+        <div>
+          <!-- <post-detail-author></post-detail-author>
           <post-detail-ad></post-detail-ad>
           <post-detail-related></post-detail-related>
           <post-detail-catalog></post-detail-catalog> -->
-        <aside
-          class="w-[300px] h-[300px] bg-[#ffffff] hidden postLep:block"
-        ></aside>
+          <aside class="w-[300px] h-[300px] bg-[#ffffff]"></aside>
+        </div>
+      </div>
+    </div>
+    <!-- mobile端 -->
+    <div class="block postLep:hidden">
+      <!-- panel -->
+      <div class="w-full z-10">
+        <postDetailSuspendPanel />
+      </div>
+      <!-- 文章详情 -->
+      <div class="z-0">
+        <postDetailContent></postDetailContent>
       </div>
     </div>
   </div>

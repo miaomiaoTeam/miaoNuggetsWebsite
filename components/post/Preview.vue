@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="z-0 relative">
     <client-only>
       <mavon-editor
         v-model="handbook"
