@@ -3,12 +3,14 @@
     <client-only>
       <mavon-editor
         v-model="handbook"
+        navigation
         default-open="preview"
         :toolbars-flag="false"
         :editable="false"
         :subfield="false"
         box-shadow-style="0 0 #0000"
         preview-background="#ffffff"
+        refs="markdown"
     /></client-only>
   </div>
 </template>
@@ -16,6 +18,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import preview from '@/content/docs/standards/git.md?raw'
+console.log('ref--ref--ref--ref', ref)
 
 const handbook = ref(preview)
 </script>
