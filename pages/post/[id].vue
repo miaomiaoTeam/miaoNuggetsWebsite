@@ -11,8 +11,8 @@
       <div>
         <!-- <post-detail-author></post-detail-author>
           <post-detail-ad></post-detail-ad>
-          <post-detail-related></post-detail-related>
-          <post-detail-catalog></post-detail-catalog> -->
+          <post-detail-related></post-detail-related> -->
+        <post-detail-catalog></post-detail-catalog>
         <aside
           class="w-[300px] h-[300px] bg-[#ffffff] hidden postLep:block"
         ></aside>
