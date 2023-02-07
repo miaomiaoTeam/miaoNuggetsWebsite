@@ -13,11 +13,7 @@
         </div>
         <!-- 右侧栏 -->
         <div>
-          <!-- <post-detail-author></post-detail-author>
-          <post-detail-ad></post-detail-ad>
-          <post-detail-related></post-detail-related>
-          <post-detail-catalog></post-detail-catalog> -->
-          <aside class="w-[300px] h-[300px] bg-[#ffffff]"></aside>
+          <postDetailCatalog />
         </div>
       </div>
     </div>
