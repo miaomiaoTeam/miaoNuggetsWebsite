@@ -10,7 +10,9 @@ export default defineNuxtConfig({
     typeCheck: true,
   },
   alias: {
+    stores: resolve('./stores'),
     'server-utils': resolve('./server/utils'),
+    'server-config': resolve('./server/config'),
   },
   app: {
     head: {
