@@ -1,7 +1,7 @@
 import { Redis } from 'ioredis'
 import stringRandom from 'string-random'
 import RedisConfig from 'server-config/redis'
-
+console.log(RedisConfig)
 export const access_redis = new Redis({
   ...RedisConfig,
   db: 0,
