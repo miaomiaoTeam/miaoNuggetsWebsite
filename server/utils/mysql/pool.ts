@@ -1,7 +1,7 @@
 import type { Pool, PoolConnection } from 'mysql'
 import { createPool } from 'mysql'
-import MySQLConfig from 'server-config/mysql'
 import { useDBG } from './log'
+import MySQLConfig from 'server-config/mysql'
 
 const dbg = useDBG(true)
 

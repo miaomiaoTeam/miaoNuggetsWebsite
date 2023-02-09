@@ -1,19 +1,14 @@
 import { Redis } from 'ioredis'
 import stringRandom from 'string-random'
+import RedisConfig from 'server-config/redis'
 
 export const access_redis = new Redis({
-  host: 'r-bp1igthvh7undn13cmpd.redis.rds.aliyuncs.com',
-  port: 6379,
-  username: 'miao_nuggets',
-  password: 'Miao202302',
+  ...RedisConfig,
   db: 0,
 })
 
 export const refresh_redis = new Redis({
-  host: 'r-bp1igthvh7undn13cmpd.redis.rds.aliyuncs.com',
-  port: 6379,
-  username: 'miao_nuggets',
-  password: 'Miao202302',
+  ...RedisConfig,
   db: 1,
 })
 
