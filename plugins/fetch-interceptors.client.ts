@@ -102,7 +102,7 @@ export default defineNuxtPlugin(() => {
           resolve = (value: unknown) => {
             if (!responses?.resolve.size || !pedding) return
             const _responses = Array.from(responses.resolve)
-            console.warn('执行列表', _responses.length)
+            IS_DEV && console.warn('执行列表', _responses.length)
             requests_bucket.delete(request_key)
             for (const resolve of _responses) {
               resolve(value)
@@ -112,10 +112,12 @@ export default defineNuxtPlugin(() => {
           reject = (reason?: any) => {
             if (!responses?.reject.size || !pedding) return
             const _responses = Array.from(responses.reject)
-            console.error('执行列表', _responses.length)
-            ElMessage.error(
-              reason.message ?? reason.statusMessage ?? '请求错误'
-            )
+            IS_DEV && console.error('执行列表', _responses.length)
+            IS_DEV &&
+              ElMessage.error(
+                '[DEBUG] ' +
+                  (reason.message ?? reason.statusMessage ?? '请求错误')
+              )
             requests_bucket.delete(request_key)
             for (const reject of _responses) {
               reject(reason)
@@ -191,7 +193,7 @@ export default defineNuxtPlugin(() => {
             } catch (e) {
               refresh_lock.value = false
               request_cache.clear()
-              ElMessage.error(err.message)
+              IS_DEV && ElMessage.error('[DEBUG] ' + err.message)
               reject(err)
             }
           }
