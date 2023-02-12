@@ -9,4 +9,13 @@ namespace Client {
   }
 
   type UserInfo = Omit<DB.AdminList, 'password'>
+
+  namespace Admin {
+    interface tableColumn {
+      label: string
+      prop: string
+      width?: string | number
+      editor?: 'switch' | 'input'
+    }
+  }
 }

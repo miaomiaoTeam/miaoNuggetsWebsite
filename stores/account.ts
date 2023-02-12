@@ -9,12 +9,12 @@ export const useAccount = definePiniaStore('account', {
   getters: {
     access_token(): string | undefined {
       const { value, expired = 0 } = this.token?.access || {}
-      if (Date.now() > expired) return
+      if (Date.now() / 1000 > expired) return
       return value
     },
     refresh_token(): string | undefined {
       const { value, expired = 0 } = this.token?.refresh || {}
-      if (Date.now() > expired) return
+      if (Date.now() / 1000 > expired) return
       return value
     },
     has_login(): boolean {
@@ -29,9 +29,10 @@ export const useAccount = definePiniaStore('account', {
       })
       if (result.code) {
         ElMessage.error(result.message)
-        return
+        return Promise.reject(result)
       }
       this.token = result.data
+      this.getUserInfo()
     },
     async getUserInfo(userinfo?: Client.UserInfo, justread = false) {
       if (justread) userinfo = this.userinfo!
@@ -58,10 +59,41 @@ export const useAccount = definePiniaStore('account', {
       const headers = new Headers()
       headers.set('Authentication', this.refresh_token ?? '')
       await $fetch('/api/auth/admin/logout', {
-        method: 'head',
+        method: 'post',
         headers,
       })
       this.$reset()
+      await navigateTo('/_admin')
+    },
+    async getLoginStatus() {
+      try {
+        if (this.has_login) return true
+        if (this.access_token) {
+          const userinfo = await this.getUserInfo()
+          console.log(userinfo)
+          return !!userinfo
+        }
+        if (this.refresh_token) {
+          const token = await this.refreshToken()
+          console.log(token)
+          return !!token
+        }
+      } catch (err) {
+        console.error(err)
+      }
+      return false
     },
   },
+  persist: [
+    {
+      key: 'USER_TOKEN',
+      paths: ['token'],
+      storage: persistedState.localStorage,
+    },
+    {
+      key: 'USER_INFO',
+      paths: ['userinfo'],
+      storage: persistedState.localStorage,
+    },
+  ],
 })

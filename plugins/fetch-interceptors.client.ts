@@ -77,6 +77,11 @@ export default defineNuxtPlugin(() => {
     >()
   )
 
+  const no_intercepte_list = new Set([
+    '/api/auth/admin/refresh',
+    '/api/auth/admin/logout',
+  ])
+
   Object.defineProperty(window, '$fetch', {
     configurable: true,
     enumerable: true,
@@ -142,7 +147,7 @@ export default defineNuxtPlugin(() => {
               )
             reject(reason)
           }
-          if (request === '/api/auth/admin/refresh')
+          if (no_intercepte_list.has(request))
             return originFetch(request, opts).then(resolve, go_login)
           const setToken = (token?: string) => {
             if (!token) return

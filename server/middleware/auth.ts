@@ -33,5 +33,6 @@ export default defineEventHandler(async event => {
 
     // @ts-ignore
     userinfo.id = Number(userinfo.id)
+    event.context.$userinfo = userinfo
   }
 })

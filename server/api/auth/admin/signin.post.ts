@@ -13,6 +13,7 @@ export default defineEventHandler(async event => {
       code: 12000,
       message: '用户名或密码错误',
     } as const
+  console.log(admin)
   const access = await createToken(access_redis, admin, 7 * 24 * 3600)
   const refresh = await createToken(
     refresh_redis,

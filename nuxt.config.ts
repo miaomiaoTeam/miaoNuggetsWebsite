@@ -47,6 +47,7 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@vueuse/nuxt',
     '@element-plus/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
     // https://github.com/nuxt-community/eslint-module/issues/78
     // '@nuxtjs/eslint-module',
     [
@@ -105,5 +106,8 @@ export default defineNuxtConfig({
         maxSize: 250000,
       },
     },
+  },
+  elementPlus: {
+    components: ['ElSubMenu'],
   },
 })

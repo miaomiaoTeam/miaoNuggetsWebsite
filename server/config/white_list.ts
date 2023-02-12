@@ -1,6 +1,7 @@
 const white_list_api = {
   api: {
-    auth: [{ admin: ['signin', 'logout'] }],
+    auth: [{ admin: ['signin', 'refresh', 'logout'] }, 'token-valid'],
+    label: [{ tabs: ['list'] }],
   },
 }
 

@@ -28,5 +28,6 @@ export const query = <T extends Record<string, any> | unknown = unknown>(
         }
         resolve(results)
       })
+      conn.release()
     })
   })
