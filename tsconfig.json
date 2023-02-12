@@ -1,8 +1,8 @@
 {
-	"compilerOptions": {
-		"types": ["vitest/globals", "element-plus/global"],
-		"typeRoots": ["./interface"],
-		"esModuleInterop": true
-	},
-	"extends": "./.nuxt/tsconfig.json"
+  "compilerOptions": {
+    "types": ["vite/client", "vitest/globals", "element-plus/global"],
+    "typeRoots": ["./interface"],
+    "esModuleInterop": true
+  },
+  "extends": "./.nuxt/tsconfig.json"
 }

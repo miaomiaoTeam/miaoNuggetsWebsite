@@ -10,7 +10,9 @@ export default defineNuxtConfig({
     typeCheck: true,
   },
   alias: {
+    stores: resolve('./stores'),
     'server-utils': resolve('./server/utils'),
+    'server-config': resolve('./server/config'),
   },
   app: {
     head: {
@@ -45,6 +47,7 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@vueuse/nuxt',
     '@element-plus/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
     // https://github.com/nuxt-community/eslint-module/issues/78
     // '@nuxtjs/eslint-module',
     [
@@ -103,5 +106,8 @@ export default defineNuxtConfig({
         maxSize: 250000,
       },
     },
+  },
+  elementPlus: {
+    components: ['ElSubMenu'],
   },
 })
