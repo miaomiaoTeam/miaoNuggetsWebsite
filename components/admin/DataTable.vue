@@ -4,7 +4,7 @@
       <ElIcon><Refresh /></ElIcon>
       <span>刷新</span>
     </ElButton>
-    <ElButton plain @click="openTabsDrawer">
+    <ElButton plain @click="openDrawer">
       <ElIcon><CirclePlus /></ElIcon>
       <span>新增</span>
     </ElButton>
@@ -77,10 +77,10 @@
     >
       <slot name="drawer" />
       <template #footer>
-        <ElButton v-if="clearTabsDrawer" plain @click="clearTabsDrawer">
+        <ElButton v-if="clearDrawer" plain @click="clearDrawer">
           重置
         </ElButton>
-        <ElButton type="success" @click="closeTabsDrawer">提交</ElButton>
+        <ElButton type="success" @click="closeDrawer">提交</ElButton>
       </template>
     </ElDrawer>
   </ClientOnly>
@@ -96,17 +96,17 @@ const props = withDefaults(
     showUpdateTime?: boolean
     showActions?: boolean
     tabsDrawerTilte?: string
-    beforeOpenTabsDrawer?: () => MaybePromise<Error | boolean | void>
-    beforeCloseTabsDrawer?: () => MaybePromise<Error | boolean | void>
-    clearTabsDrawer?: () => {}
+    beforeOpenDrawer?: () => MaybePromise<Error | boolean | void>
+    beforeCloseDrawer?: () => MaybePromise<Error | boolean | void>
+    clearDrawer?: () => {}
   }>(),
   {
     showUpdateTime: true,
     showActions: true,
     tabsDrawerTilte: '数据表单',
-    beforeOpenTabsDrawer: undefined,
-    beforeCloseTabsDrawer: undefined,
-    clearTabsDrawer: undefined,
+    beforeOpenDrawer: undefined,
+    beforeCloseDrawer: undefined,
+    clearDrawer: undefined,
   }
 )
 defineEmits<{
@@ -116,8 +116,8 @@ defineEmits<{
 }>()
 
 const tabs_drawer_show = ref(false)
-const openTabsDrawer = async () => {
-  const fn = props.beforeOpenTabsDrawer
+const openDrawer = async () => {
+  const fn = props.beforeOpenDrawer
   if (fn) {
     const res = await fn()
     if (res instanceof Error) {
@@ -128,8 +128,8 @@ const openTabsDrawer = async () => {
   }
   tabs_drawer_show.value = true
 }
-const closeTabsDrawer = async () => {
-  const fn = props.beforeCloseTabsDrawer
+const closeDrawer = async () => {
+  const fn = props.beforeCloseDrawer
   if (fn) {
     try {
       const res = await fn()
@@ -177,7 +177,7 @@ const TimeTags = defineComponent({
 })
 
 const select_rows = ref<number[]>([])
-const handleSelectChange = (vals: DB.TabsLabelList[]) => {
+const handleSelectChange = (vals: DB.WriteAble[]) => {
   select_rows.value = vals.map(({ id }) => id)
 }
 
