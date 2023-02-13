@@ -105,14 +105,23 @@ export class Transaction {
               .join('')
           )
           await this.rollback('查询出现破坏性错误 ' + err.sqlMessage)
-          reject(err)
-        } else {
-          pool.refresh()
-          if (!Array.isArray(results) || results.length)
-            this.record.push(`查询结果：\n${formatObject(results)}`)
-          else this.record.push('未找到数据')
-          resolve(results)
+          return reject(err)
         }
+        pool.refresh()
+        if (!Array.isArray(results) || results.length)
+          this.record.push(
+            `\n-\tSQL语句: ${sql}\n-\t插入值: ${
+              values?.join(' | ') ?? '无'
+            }\n-\t查询结果: \n${formatObject(results)}`,
+            results
+          )
+        else
+          this.record.push(
+            `\n-\tSQL语句: ${sql}\n-\t插入值: ${
+              values?.join(' | ') ?? '无'
+            }\n-\t查询结果: 未找到数据`
+          )
+        resolve(results)
       })
     })
   }
