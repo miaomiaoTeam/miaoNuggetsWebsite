@@ -31,28 +31,23 @@
             <span>{{ is_menu_collapse ? '展开' : '收起' }}</span>
           </template>
         </ElMenuItem>
-        <ElSubMenu index="/_admin/account">
+        <ElSubMenu
+          v-for="top_menu of admin_menu"
+          :key="top_menu.route"
+          :index="'/_admin/' + top_menu.route"
+        >
           <template #title>
             <ElIcon>
-              <User />
+              <component :is="top_menu.icon" />
             </ElIcon>
-            <span>账号管理</span>
+            <span>{{ top_menu.label }}</span>
           </template>
-          <ElMenuItem index="/_admin/account/admin">管理员</ElMenuItem>
-          <ElMenuItem index="/_admin/label/tabs" disadbled> 用户 </ElMenuItem>
-        </ElSubMenu>
-        <ElSubMenu index="/_admin/label">
-          <template #title>
-            <ElIcon>
-              <Discount />
-            </ElIcon>
-            <span>标签管理</span>
-          </template>
-          <ElMenuItem index="/_admin/label/tabs" disadbled>
-            顶部选项卡
-          </ElMenuItem>
-          <ElMenuItem index="/_admin/label/follow" disadbled>
-            可关注标签
+          <ElMenuItem
+            v-for="child_menu of top_menu.children"
+            :key="child_menu.route"
+            :index="`/_admin/${top_menu.route}/${child_menu.route}`"
+          >
+            {{ child_menu.label }}
           </ElMenuItem>
         </ElSubMenu>
       </ElMenu>
@@ -80,6 +75,27 @@ const icon =
 /** 菜单是否折叠 */
 const is_menu_collapse = useState('admininistar_menu_collapse', () => false)
 const toggle_menu_collapse = useToggle(is_menu_collapse)
+
+const admin_menu = [
+  {
+    label: '账号管理',
+    route: 'account',
+    icon: User,
+    children: [
+      { label: '管理员', route: 'admin' },
+      { label: '用户', route: 'user' },
+    ],
+  },
+  {
+    label: '标签管理',
+    route: 'label',
+    icon: Discount,
+    children: [
+      { label: '顶部选项卡', route: 'tabs' },
+      { label: '可关注标签', route: 'follow' },
+    ],
+  },
+]
 </script>
 
 <style lang="postcss" scoped>

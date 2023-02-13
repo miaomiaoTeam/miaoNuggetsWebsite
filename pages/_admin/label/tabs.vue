@@ -3,7 +3,7 @@
     <AdminDataTable
       :table-data="tabs_list"
       :table-columns="tabs_columns"
-      :before-close-tabs-drawer="submitTabsLabelPut"
+      :before-close-drawer="submitTabsLabelPut"
       @refresh="refresh()"
       @remove="removeTabs"
     >
@@ -44,7 +44,7 @@
   </NuxtLayout>
 </template>
 
-<script lang="tsx" setup>
+<script lang="ts" setup>
 import type { FormInstance, FormRules } from 'element-plus'
 definePageMeta({
   middleware: ['admin-auth'],

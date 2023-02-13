@@ -26,4 +26,14 @@ namespace DB {
     is_show: boolean
     in_menu: boolean
   }
+
+  /** 可关注标签列表 */
+  interface FollowLabelList extends WriteAble {
+    label: string
+    alias: string
+    icon: string
+    follow: number
+    article: number
+    is_show: boolean
+  }
 }

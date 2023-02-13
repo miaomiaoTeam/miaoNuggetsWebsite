@@ -18,13 +18,27 @@ export const query = <T extends Record<string, any> | unknown = unknown>(
         }
         if (!Array.isArray(results)) {
           log(getTilte().toString(), results)
-          record(`查询结果: `, results)
+          record(
+            `\n-\tSQL语句: ${sql}\n-\t插入值: ${
+              values?.join(' | ') ?? '无'
+            }\n-\t查询结果: `,
+            results
+          )
         } else if (results.length) {
           log(getTilte().toString(), `查询到${results.length}条数据`)
-          record(`查询结果: `, results)
+          record(
+            `\n-\tSQL语句: ${sql}\n-\t插入值: ${
+              values?.join(' | ') ?? '无'
+            }\n-\t查询结果: `,
+            results
+          )
         } else {
           log(getTilte().toString(), '未找到数据')
-          record('未找到数据')
+          record(
+            `\n-\tSQL语句: ${sql}\n-\t插入值: ${
+              values?.join(' | ') ?? '无'
+            }\n-\t查询结果: 未找到数据`
+          )
         }
         resolve(results)
       })

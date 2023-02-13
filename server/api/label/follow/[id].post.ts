@@ -2,18 +2,16 @@ import { query } from 'server-utils/mysql'
 
 export default defineEventHandler(async event => {
   const id = Number(event.context.params.id)
-  const tab = await readBody<RQ.EditTabsLabelPost>(event)
+  const tab = await readBody<RQ.EditFollowLabelPost>(event)
   const items = [] as string[]
   const params = [] as any[]
-  const allow_items = new Set([
+  const allow_items = new Set<keyof typeof tab>([
     'label',
-    'route',
-    'link',
-    'badge',
+    'alias',
+    'icon',
     'is_show',
-    'in_menu',
   ])
-  const format_bool = new Set(['is_show', 'in_menu'])
+  const format_bool = new Set<keyof typeof tab>(['is_show'])
   for (const _key in tab) {
     const key = _key as keyof typeof tab
     if (Object.prototype.hasOwnProperty.call(tab, key)) {
@@ -32,7 +30,7 @@ export default defineEventHandler(async event => {
   if (
     !(
       await query(
-        `update tabs_label_list set ${items.join()} where id=?`,
+        `update follow_label_list set ${items.join()} where id=?`,
         params
       )
     ).changedRows

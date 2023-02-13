@@ -17,5 +17,10 @@ namespace Client {
       width?: string | number
       editor?: 'switch' | 'input'
     }
+    interface DataEditorProps<Row extends DB.WriteAble = DB.WriteAble> {
+      row: Row
+      rowKey: keyof Row | string
+      type: 'switch' | 'input'
+    }
   }
 }
