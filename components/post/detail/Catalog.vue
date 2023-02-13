@@ -7,7 +7,11 @@
       <div
         v-for="toc in tocs"
         :key="toc.href"
-        :class="toc.href === activeToc ? 'text-[#007fff] p-2' : 'p-2'"
+        :class="
+          toc.href === activeToc
+            ? 'text-[#007fff] p-2 _active relative'
+            : 'p-2 relative'
+        "
         @click="hightLightHandler(toc.href)"
       >
         <a
@@ -79,4 +83,15 @@ function throttle(fn: (...arg: any[]) => any, interval = 300) {
   }
 }
 </script>
-<style scoped></style>
+<style scoped>
+._active::before {
+  content: '';
+  position: absolute;
+  top: 30%;
+  left: 0;
+  width: 4px;
+  height: 16px;
+  background-color: #1e80ff;
+  border-radius: 0 4px 4px 0;
+}
+</style>

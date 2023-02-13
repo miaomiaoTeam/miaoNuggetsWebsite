@@ -13,6 +13,7 @@
         </div>
         <!-- 右侧栏 -->
         <div>
+          <div class="h-[10px] w-[300px] bg-[white]"></div>
           <postDetailCatalog />
         </div>
       </div>
