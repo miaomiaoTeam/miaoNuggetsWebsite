@@ -23,4 +23,20 @@ namespace RQ {
   interface RemoveTabLabelDelete {
     id: MaybeArray<number>
   }
+
+  interface EditFollowLabelPost {
+    label?: string
+    alias?: string
+    icon?: string
+    is_show?: boolean
+  }
+  interface NewFollowLabelPut {
+    label: string
+    alias: string
+    icon: string
+    is_show?: boolean
+  }
+  interface RemoveFollowLabelDelete {
+    id: MaybeArray<number>
+  }
 }
