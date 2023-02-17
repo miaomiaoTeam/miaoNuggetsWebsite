@@ -18,10 +18,13 @@
     </ElHeader>
     <ElMain class="!flex flex-row w-full h-[calc(100%-60px)]">
       <ElMenu
+        ref="admin_menu_ref"
         class="el-menu-vertical"
         :collapse="is_menu_collapse"
         unique-opened
         router
+        :default-active="route.path"
+        :default-openeds="[route.path.replace(/\/([^/]*)$/, '')]"
       >
         <ElMenuItem :index="route.fullPath" @click="toggle_menu_collapse()">
           <ElIcon>
@@ -64,7 +67,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Discount, Expand, User } from '@element-plus/icons-vue'
+import { Discount, Document, Expand, User } from '@element-plus/icons-vue'
 import { useAccount } from 'stores/account'
 const account = useAccount()
 const route = useRoute()
@@ -74,6 +77,14 @@ const icon =
 
 /** 菜单是否折叠 */
 const is_menu_collapse = useState('admininistar_menu_collapse', () => false)
+onMounted(() => {
+  const admininistar_menu_collapse = useLocalStorage(
+    'admininistar_menu_collapse',
+    false
+  )
+  is_menu_collapse.value = admininistar_menu_collapse.value
+  watch(is_menu_collapse, val => (admininistar_menu_collapse.value = val))
+})
 const toggle_menu_collapse = useToggle(is_menu_collapse)
 
 const admin_menu = [
@@ -93,9 +104,22 @@ const admin_menu = [
     children: [
       { label: '顶部选项卡', route: 'tabs' },
       { label: '可关注标签', route: 'follow' },
+      { label: '文章类型', route: 'category' },
     ],
   },
+  {
+    label: '文章管理',
+    route: 'article',
+    icon: Document,
+    children: [{ label: '文章列表', route: 'table' }],
+  },
 ]
+const admin_menu_ref = ref()
+onMounted(async () => {
+  await nextTick()
+  const index = route.path.replace(/\/([^/]*)$/, '')
+  is_menu_collapse.value || admin_menu_ref.value?.open(index)
+})
 </script>
 
 <style lang="postcss" scoped>

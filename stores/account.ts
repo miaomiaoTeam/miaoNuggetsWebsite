@@ -58,7 +58,7 @@ export const useAccount = definePiniaStore('account', {
     async logout() {
       const headers = new Headers()
       headers.set('Authentication', this.refresh_token ?? '')
-      await $fetch('/api/auth/admin/logout', {
+      await $fetch('/api/auth/logout', {
         method: 'post',
         headers,
       })

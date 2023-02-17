@@ -4,6 +4,8 @@
       :table-data="tabs_list"
       :table-columns="tabs_columns"
       :before-close-drawer="submitTabsLabelPut"
+      editor-request-url="/api/label/tabs/:id"
+      :search-props="['label', 'route', 'link', 'badge']"
       @refresh="refresh()"
       @remove="removeTabs"
     >
@@ -64,12 +66,36 @@ onMounted(() => {
   refresh()
 })
 const tabs_columns = reactive<Client.Admin.tableColumn[]>([
-  { label: '标签', prop: 'label', editor: 'input' },
-  { label: '路由', prop: 'route', editor: 'input' },
-  { label: '链接', prop: 'link', editor: 'input' },
-  { label: '徽章', prop: 'badge', editor: 'input' },
-  { label: '顶部显示', prop: 'is_show', editor: 'switch' },
-  { label: '菜单显示', prop: 'in_menu', editor: 'switch' },
+  { label: '标签', prop: 'label', editor: 'input', width: '60' },
+  { label: '路由', prop: 'route', editor: 'input', width: '120' },
+  { label: '链接', prop: 'link', editor: 'input', width: '240' },
+  { label: '徽章', prop: 'badge', editor: 'input', width: '120' },
+  {
+    label: '顶部显示',
+    prop: 'is_show',
+    editor: 'switch',
+    width: '120',
+    filter: {
+      options: [
+        { text: '显示', value: true },
+        { text: '隐藏', value: false },
+      ],
+      multiple: false,
+    },
+  },
+  {
+    label: '菜单显示',
+    prop: 'in_menu',
+    editor: 'switch',
+    width: '120',
+    filter: {
+      options: [
+        { text: '显示', value: true },
+        { text: '隐藏', value: false },
+      ],
+      multiple: false,
+    },
+  },
 ])
 
 const tabs_form_ref = ref<FormInstance>()

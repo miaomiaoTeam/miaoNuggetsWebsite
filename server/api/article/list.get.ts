@@ -2,12 +2,10 @@ import { query } from 'server-utils/mysql'
 import { dataToJson } from 'server-utils/format'
 
 export default defineEventHandler(async () => {
-  const tags = await query<DB.FollowLabelList>(
-    'select * from follow_label_list'
-  )
+  const articles = await query<DB.ArticleList>('select * from article_list')
   return {
     code: 0,
     message: 'OK',
-    data: dataToJson.tags(tags),
+    data: dataToJson.articles(articles),
   } as const
 })
