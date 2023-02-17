@@ -89,7 +89,7 @@ export default defineEventHandler(async event => {
         is_follow: false,
         is_collect: false,
       }
-      if ($userinfo && $userinfo.role && $userinfo.role !== 'admin') {
+      if ($userinfo) {
         const { like_article, collect_article, follow_user } = $userinfo
         if (`id:${article_id}` in like_article) user_interact.is_like = true
         if (`id:${article_id}` in collect_article)

@@ -36,7 +36,7 @@ export const useAccount = definePiniaStore('account', {
     },
     async getUserInfo(userinfo?: Client.UserInfo, justread = false) {
       if (justread) userinfo = this.userinfo!
-      if (!userinfo) userinfo = (await $fetch('/api/auth/admin/info')).data
+      if (!userinfo) userinfo = (await $fetch('/api/auth/info')).data
       if (!justread) this.userinfo = userinfo!
       return userinfo
     },
