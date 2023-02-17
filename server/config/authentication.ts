@@ -1,7 +1,24 @@
 const white_list_api = {
   api: {
-    auth: [{ admin: ['signin', 'refresh', 'logout'] }, 'token-valid'],
-    label: [{ tabs: ['list'] }],
+    auth: [
+      { admin: ['signin', 'refresh'], user: ['signin', 'refresh'] },
+      'token-valid',
+      'logout',
+    ],
+    label: { tabs: ['list'], follow: ['list'], category: ['list'] },
+    article: ['list', 'info', 'author', 'alike', 'recommend'],
+  },
+}
+
+const admin_list_api = {
+  api: {
+    auth: { admin: ['info'], user: ['list', 'new', 'remove'] },
+    label: {
+      tabs: ['new', 'remove'],
+      follow: ['new', 'remove'],
+      category: ['new', 'remove'],
+    },
+    article: ['new', 'remove'],
   },
 }
 
@@ -31,3 +48,4 @@ const readApi = (apis: string | Array<string | RouteList>, prefix = '') => {
 }
 
 export const white_list = new Set(readRoute(white_list_api))
+export const admin_list = new Set(readRoute(admin_list_api))

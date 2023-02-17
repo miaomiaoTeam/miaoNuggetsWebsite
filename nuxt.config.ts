@@ -11,6 +11,7 @@ export default defineNuxtConfig({
   },
   alias: {
     stores: resolve('./stores'),
+    utils: resolve('./utils'),
     'server-utils': resolve('./server/utils'),
     'server-config': resolve('./server/config'),
   },

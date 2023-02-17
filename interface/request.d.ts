@@ -4,6 +4,26 @@ namespace RQ {
     password: string
   }
 
+  type EditUserPost = PickRecord<
+    DB.UserList,
+    | 'password'
+    | 'nickname'
+    | 'role'
+    | 'occupation'
+    | 'identity'
+    | 'introduce'
+    | 'homepage'
+    | 'github'
+  >
+  type NewUserPut = PickRecord<
+    DB.UserList,
+    'introduce' | 'occupation' | 'identity',
+    'nickname'
+  >
+  interface RemoveUserDelete {
+    id: MaybeArray<number>
+  }
+
   interface EditTabsLabelPost {
     label?: string
     route?: string
@@ -24,19 +44,52 @@ namespace RQ {
     id: MaybeArray<number>
   }
 
-  interface EditFollowLabelPost {
-    label?: string
-    alias?: string
-    icon?: string
-    is_show?: boolean
-  }
-  interface NewFollowLabelPut {
-    label: string
-    alias: string
-    icon: string
-    is_show?: boolean
-  }
+  type EditFollowLabelPost = PickRecord<
+    DB.FollowLabelList,
+    'label' | 'alias' | 'icon' | 'is_show'
+  >
+  type NewFollowLabelPut = PickRecord<
+    DB.FollowLabelList,
+    'is_show',
+    'label' | 'alias' | 'icon'
+  >
   interface RemoveFollowLabelDelete {
+    id: MaybeArray<number>
+  }
+
+  type EditCategoryPost = PickRecord<
+    DB.CategoryList,
+    'label' | 'alias' | 'icon' | 'is_show'
+  >
+  type NewCategoryPut = PickRecord<
+    DB.CategoryList,
+    'is_show',
+    'label' | 'alias' | 'icon'
+  >
+  interface RemoveCategoryDelete {
+    id: MaybeArray<number>
+  }
+
+  interface ArticleListGet {
+    cursor: number
+    limit: number
+  }
+  type EditArticlePost = PickRecord<
+    DB.ArticleList,
+    | 'introduce'
+    | 'cover_image'
+    | 'title'
+    | 'author_id'
+    | 'category_id'
+    | 'tag_ids'
+    | 'content_path'
+  >
+  type NewArticlePut = PickRecord<
+    DB.ArticleList,
+    'introduce' | 'cover_image',
+    'title' | 'author_id' | 'category_id' | 'tag_ids' | 'content_path'
+  >
+  interface RemoveArticleDelete {
     id: MaybeArray<number>
   }
 }

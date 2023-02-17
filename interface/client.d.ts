@@ -8,19 +8,28 @@ namespace Client {
     refresh: Token
   }
 
-  type UserInfo = Omit<DB.AdminList, 'password'>
+  type UserInfo = Omit<DB.AdminList, 'password'> | Omit<DB.UserList, 'password'>
 
   namespace Admin {
-    interface tableColumn {
+    interface tableColumn<Data extends DB.Base = Record<string, unknown>> {
       label: string
-      prop: string
+      prop: keyof Data
       width?: string | number
-      editor?: 'switch' | 'input'
+      filter?: {
+        options?: { text: string; value: any }[]
+        method?: (val: string, row: Data) => boolean
+        multiple?: boolean
+      }
+      editor?: 'switch' | 'input' | 'select'
+      select?: {
+        options: () => selectOption[]
+        multiple?: boolean
+      }
     }
-    interface DataEditorProps<Row extends DB.WriteAble = DB.WriteAble> {
-      row: Row
-      rowKey: keyof Row | string
-      type: 'switch' | 'input'
+    interface selectOption {
+      label?: string | number
+      value: string | number | boolean | object
+      disabled?: boolean
     }
   }
 }

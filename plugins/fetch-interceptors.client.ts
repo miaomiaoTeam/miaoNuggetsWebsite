@@ -60,6 +60,12 @@ export default defineNuxtPlugin(() => {
               console.log(`${chalk.blue(key)}:`, val)
             }
             console.groupEnd()
+            ElMessage.info(
+              '[DEBUG] ' +
+                (ctx.response._data.message ??
+                  ctx.response._data.statusMessage ??
+                  '请求错误')
+            )
           } else console.log(`${chalk.green('响应值')}:`, ctx.response._data)
         }
         console.groupEnd()
@@ -118,11 +124,6 @@ export default defineNuxtPlugin(() => {
             if (!responses?.reject.size || !pedding) return
             const _responses = Array.from(responses.reject)
             IS_DEV && console.error('执行列表', _responses.length)
-            IS_DEV &&
-              ElMessage.error(
-                '[DEBUG] ' +
-                  (reason.message ?? reason.statusMessage ?? '请求错误')
-              )
             requests_bucket.delete(request_key)
             for (const reject of _responses) {
               reject(reason)

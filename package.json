@@ -8,6 +8,7 @@
     "build": "nuxi build",
     "analyze": "nuxi analyze",
     "start": "nuxi preview",
+    "type": "nuxi typecheck",
     "test": "vitest",
     "test-unit": "vitest run -c vitest.unit.config.ts",
     "test-coverage": "vitest run -c vitest.unit.config.ts --coverage",

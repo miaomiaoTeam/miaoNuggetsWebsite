@@ -36,7 +36,7 @@ export const useAccount = definePiniaStore('account', {
     },
     async getUserInfo(userinfo?: Client.UserInfo, justread = false) {
       if (justread) userinfo = this.userinfo!
-      if (!userinfo) userinfo = (await $fetch('/api/auth/admin/info')).data
+      if (!userinfo) userinfo = (await $fetch('/api/auth/info')).data
       if (!justread) this.userinfo = userinfo!
       return userinfo
     },
@@ -58,7 +58,7 @@ export const useAccount = definePiniaStore('account', {
     async logout() {
       const headers = new Headers()
       headers.set('Authentication', this.refresh_token ?? '')
-      await $fetch('/api/auth/admin/logout', {
+      await $fetch('/api/auth/logout', {
         method: 'post',
         headers,
       })
