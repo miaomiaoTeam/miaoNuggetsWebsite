@@ -112,6 +112,12 @@ const admin_menu = [
     icon: Document,
     children: [{ label: '文章列表', route: 'table' }],
   },
+  {
+    label: '广告管理',
+    route: 'ad',
+    icon: Document,
+    children: [{ label: '广告列表', route: 'ad' }],
+  },
 ]
 const admin_menu_ref = ref()
 onMounted(async () => {

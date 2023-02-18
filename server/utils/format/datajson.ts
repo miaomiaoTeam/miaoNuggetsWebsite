@@ -65,3 +65,12 @@ dataToJson.article = function (articles: DB.ArticleList) {
 dataToJson.articles = function (articles: DB.ArticleList[]) {
   return articles.map(dataToJson.article)
 }
+
+dataToJson.ad = function (ads: DB.ADList) {
+  return dataToJson(ads, {
+    bool: ['is_show'],
+  })
+}
+dataToJson.ads = function (ads: DB.ADList[]) {
+  return ads.map(dataToJson.ad)
+}

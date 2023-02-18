@@ -7,6 +7,8 @@ const white_list_api = {
     ],
     label: { tabs: ['list'], follow: ['list'], category: ['list'] },
     article: ['list', 'info', 'author', 'alike', 'recommend'],
+    author: ['rank'],
+    ad: ['list'],
   },
 }
 
@@ -19,6 +21,7 @@ const admin_list_api = {
       category: ['new', 'remove'],
     },
     article: ['new', 'remove'],
+    ad: ['new', 'remove'],
   },
 }
 
