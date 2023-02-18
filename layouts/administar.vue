@@ -68,7 +68,6 @@
 
 <script lang="ts" setup>
 import { Discount, Document, Expand, User } from '@element-plus/icons-vue'
-import { useAccount } from 'stores/account'
 const account = useAccount()
 const route = useRoute()
 

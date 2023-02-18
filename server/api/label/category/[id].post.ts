@@ -1,7 +1,7 @@
 import { query } from 'server-utils/mysql'
 
 export default defineEventHandler(async event => {
-  const id = Number(event.context.params.id)
+  const id = Number(event.context.params?.id ?? 0)
   const tab = await readBody<RQ.EditCategoryPost>(event)
   const items = [] as string[]
   const params = [] as any[]
@@ -36,11 +36,3 @@ export default defineEventHandler(async event => {
     },
   } as const
 })
-
-declare module 'h3' {
-  interface H3EventContext {
-    params: {
-      id: string
-    }
-  }
-}

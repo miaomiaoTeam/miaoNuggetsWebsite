@@ -1,6 +1,6 @@
 import chalk from 'chalk'
 import type { NuxtError } from '#app/composables'
-import type { FetchOptions } from 'ofetch'
+import type { NitroFetchOptions } from 'nitropack'
 import { useAccount } from 'stores/account'
 
 export default defineNuxtPlugin(() => {
@@ -92,7 +92,7 @@ export default defineNuxtPlugin(() => {
     configurable: true,
     enumerable: true,
     get() {
-      return (request: string, opts: FetchOptions = {}) => {
+      return (request: string, opts: NitroFetchOptions<string> = {}) => {
         return new Promise((resolve, reject) => {
           if (!request.startsWith('/api'))
             return resolve(originFetch(request, opts))

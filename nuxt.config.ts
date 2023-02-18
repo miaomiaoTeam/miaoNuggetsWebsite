@@ -76,12 +76,7 @@ export default defineNuxtConfig({
     },
   },
   imports: {
-    dirs: [
-      'composables',
-      'composables/*/index.{ts,js,tsx,jsx,mjs,mts}',
-      'composables/**',
-      './utils',
-    ],
+    dirs: ['composables/*/index.{ts,js,tsx,jsx,mjs,mts}', 'stores/**/*.ts'],
   },
   build: {
     analyze: {
