@@ -37,7 +37,7 @@
 
 <script lang="ts" setup>
 import type { FormInstance, FormRules } from 'element-plus'
-import { useUserList } from 'stores/_admin/user'
+import { AdminDataTable } from '#components'
 definePageMeta({
   middleware: ['admin-auth'],
 })

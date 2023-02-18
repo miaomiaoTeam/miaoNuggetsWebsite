@@ -118,6 +118,7 @@
 import { ElTag } from 'element-plus'
 import { Refresh, CirclePlus, Delete, Search } from '@element-plus/icons-vue'
 import type { NitroFetchRequest } from 'nitropack'
+import { AdminDataEditor } from '#components'
 const props = withDefaults(
   defineProps<{
     tableData: any[]
