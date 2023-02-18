@@ -1,6 +1,3 @@
-import { query } from 'server-utils/mysql'
-import { access_redis, refresh_redis, createToken } from 'server-utils/redis'
-
 export default defineEventHandler(async event => {
   const { $token } = event.context
   const { access_token, user_id } = await refresh_redis.hgetall($token)

@@ -1,5 +1,3 @@
-import { query } from 'server-utils/mysql'
-
 export default defineEventHandler(async event => {
   const {
     label,

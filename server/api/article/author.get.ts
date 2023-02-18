@@ -1,6 +1,3 @@
-import { query } from 'server-utils/mysql'
-import { dataToJson } from 'server-utils/format'
-
 export default defineEventHandler(async event => {
   let { id } = getQuery(event)
   if (Array.isArray(id)) id = id[0]
