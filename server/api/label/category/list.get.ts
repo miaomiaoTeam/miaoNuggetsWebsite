@@ -1,6 +1,3 @@
-import { query } from 'server-utils/mysql'
-import { dataToJson } from 'server-utils/format'
-
 export default defineEventHandler(async () => {
   const categorys = await query<DB.CategoryList>('select * from category_list')
   return {

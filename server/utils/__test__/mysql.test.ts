@@ -1,4 +1,6 @@
-import { query, useTransaction } from 'server-utils/mysql'
+import 'server-utils/mysql'
+import { query } from 'server-utils/mysql/query'
+import { useTransaction } from 'server-utils/mysql/transaction'
 
 describe('query', () => {
   test('empty', async () => {

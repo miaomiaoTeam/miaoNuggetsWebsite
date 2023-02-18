@@ -1,6 +1,3 @@
-import { query } from 'server-utils/mysql'
-import { recordTimeCount, dataToJson } from 'server-utils/format'
-
 interface UserInteract {
   is_like: boolean
   is_follow: boolean

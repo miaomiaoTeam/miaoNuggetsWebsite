@@ -1,5 +1,3 @@
-import { query } from 'server-utils/mysql'
-
 export default defineEventHandler(async event => {
   const { id } = await readBody<RQ.RemoveTabLabelDelete>(event)
   const ids = new Set(Array.isArray(id) ? id : [id])

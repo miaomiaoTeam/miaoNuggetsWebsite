@@ -1,7 +1,3 @@
-import { query } from 'server-utils/mysql'
-import { access_redis, refresh_redis, createToken } from 'server-utils/redis'
-import { dataToJson } from 'server-utils/format'
-
 export default defineEventHandler(async event => {
   const { username, password } = await readBody<RQ.SignInPost>(event)
   const [user] = dataToJson.users(
