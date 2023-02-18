@@ -7,6 +7,7 @@ export default defineNuxtPlugin(() => {
   const IS_DEV = process.dev
 
   const originFetch = $fetch.create({
+    baseURL: 'https://mock.apifox.cn/m1/2295980-0-default',
     credentials: 'omit',
     onRequest(ctx) {
       if (IS_DEV) {

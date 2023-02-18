@@ -46,7 +46,9 @@ export default defineEventHandler(async event => {
       collect_article: recordTimeCount(collect_article),
       role: 'author' as const,
     }
-    const is_follow = `id:${author_id}` in $userinfo.follow_user
+    const is_follow = $userinfo
+      ? `id:${author_id}` in $userinfo.follow_user
+      : false
     return { author_id, author_info, is_follow }
   })
   return {

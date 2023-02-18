@@ -1,82 +1,103 @@
 <template>
-  <div class="w-[300px] mb-[20px]">
-    <el-card shadow="never">
-      <template #header>
-        <div>相关文章</div>
-      </template>
-      <div v-for="post in posts" :key="post.id" class="mb-[8px]">
-        <a
-          href=""
-          class="text-[14px] font-normal text-[#252933] leading-[22px] hover:text-[#1e80ff]"
-          >{{ post.title }}</a
-        >
-        <div
-          class="text-[#8a919f] text-[14px] font-normal leading-[22px] mt-[4px]"
-        >
-          {{ post.collect_count }}点赞 · {{ post.comment_count }}评论
+  <el-card v-if="data" class="w-[240px] mb-[16px]" shadow="never">
+    <template #header>
+      <div class="author-rank">🎖️ 作者榜</div>
+    </template>
+
+    <div v-for="{ author_id, author_info } in data.data" :key="author_id">
+      <div class="author-item">
+        <img
+          class="author-avatar"
+          :src="'https://p3-passport.byteimg.com/img/user-avatar/b9a366997037d998063135bd56302b85~100x100.awebp'"
+          alt="Author Avatar"
+        />
+        <div class="author-info">
+          <div class="author-name">
+            {{ author_info.nickname }}
+            <el-tag>Lv 0</el-tag>
+          </div>
+          <div class="ellipsis">{{ author_info.introduce }}</div>
         </div>
       </div>
-    </el-card>
-  </div>
+    </div>
+  </el-card>
 </template>
 
 <script setup lang="ts">
-// const posts = ref([
+// import { ref } from 'vue'
+
+// const itemList = await $fetch('/api/author/rank')
+// const itemList = ref([])
+// watchEffect(async () => {
+//   const { data } = await useLazyFetch('http://localhost:3000/api/author/rank')
+//   console.log('data.value.data', data.value.data)
+//   itemList.value = data.value.data
+// })
+// const url = '../assets/mfer.png'
+
+const { data } = useAsyncData(
+  'TabsLabelList',
+  () =>
+    $fetch('/api/author/rank', {
+      query: { cursor: 0, limit: 5 },
+    })
+  // console.log('data',data)
+)
+
+// onMounted(() => {
+//   watch(data, vals => {
+//     if (vals) itemList.value = vals.data
+//   })
+//   watchEffect(() => console.log(itemList))
+// })
+
+// const itemList = ref([
 //   {
-//     id: '1',
-//     title: '字节跳动是如何落地微前端的',
-//     praise: '356',
-//     comment: '14',
-//   },
-//   {
-//     id: '2',
-//     title: '记笔记,赢大礼!笔记创作活动来啦!|青训营第四期',
-//     praise: '49',
-//     comment: '57',
-//   },
-//   {
-//     id: '3',
-//     title: '第五届青训营阅读打卡活动来啦,奖品规则全面升级,快来学习吧',
-//     praise: '92',
-//     comment: '48',
-//   },
-//   {
-//     id: '4',
-//     title: '字节跳动最爱考的前端面试题:CSS基础',
-//     praise: '2032',
-//     comment: '62',
-//   },
-//   {
-//     id: '5',
-//     title: '字节跳动最爱考的前端面试题:JavaScript基础',
-//     praise: '3829',
-//     comment: '432',
+//     user_id: '1',
+//     avatar: '#assets/ad.webp',
+//     user_name: '小方',
+//     description: 'sssss',
 //   },
 // ])
-// const { data: posts } = await useLazyFetch(
-//   'http://127.0.0.1:4523/m1/2295980-0-default/api/article/alike'
-// )
-// watch(
-//   posts,
-//   newPosts => {
-//     console.log(newPosts)
-//   },
-//   { immediate: true }
-// )
-interface postType {
-  id: number
-  title: string
-  collect_count: number
-  comment_count: number
-}
-const posts = ref<postType[]>([])
-watchEffect(async () => {
-  const { data } = await useLazyFetch<any>(
-    'http://127.0.0.1:4523/m1/2295980-0-default/api/article/alike'
-  )
-  console.log('data', data)
-  posts.value = data.value?.data
-})
 </script>
 
-<style scoped></style>
+<style scoped>
+.author-rank {
+  height: 14px;
+  font-size: 14px;
+  margin-top: -8px;
+}
+.author-block-title {
+  padding: 0px;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.author-item {
+  display: flex;
+  padding: 0px;
+  cursor: pointer;
+  margin-top: -8px;
+  height: 40px;
+}
+
+.author-avatar {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.author-info {
+  flex: 1 1 auto;
+  font-size: 12px;
+  color: #909090;
+  line-height: 1.5;
+  overflow: hidden;
+}
+.author-name {
+  font-size: 15px;
+  color: #262626;
+}
+</style>
