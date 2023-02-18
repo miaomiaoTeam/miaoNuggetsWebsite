@@ -92,4 +92,14 @@ namespace RQ {
   interface RemoveArticleDelete {
     id: MaybeArray<number>
   }
+
+  interface ADListGet {
+    cursor: number
+    limit: number
+  }
+  type EditADPost = PickRecord<DB.ADList, 'cover_image' | 'link' | 'is_show'>
+  type NewADPut = PickRecord<DB.ADList, 'is_show', 'cover_image' | 'link'>
+  interface RemoveADDelete {
+    id: MaybeArray<number>
+  }
 }

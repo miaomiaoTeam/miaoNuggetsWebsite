@@ -1,8 +1,8 @@
 export default defineEventHandler(async () => {
-  const users = await query<DB.UserList>('select * from user_list')
+  const ads = await query<DB.ADList>('select * from ad_list')
   return {
     code: 0,
     message: 'OK',
-    data: dataToJson.users(users),
+    data: dataToJson.ads(ads),
   } as const
 })

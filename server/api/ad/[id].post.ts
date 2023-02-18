@@ -1,12 +1,14 @@
-import { query } from 'server-utils/mysql'
-
 export default defineEventHandler(async event => {
   const id = Number(event.context.params?.id ?? 0)
-  const tab = await readBody<RQ.EditCategoryPost>(event)
+  const tab = await readBody<RQ.EditADPost>(event)
   const items = [] as string[]
   const params = [] as any[]
-  const allow_items = new Set(['label', 'alias', 'icon', 'is_show'])
-  const format_bool = new Set(['is_show'])
+  const allow_items = new Set<keyof typeof tab>([
+    'cover_image',
+    'link',
+    'is_show',
+  ])
+  const format_bool = new Set<getSet<typeof allow_items>>(['is_show'])
   for (const _key in tab) {
     const key = _key as keyof typeof tab
     if (Object.prototype.hasOwnProperty.call(tab, key)) {
@@ -23,9 +25,8 @@ export default defineEventHandler(async event => {
     } as const
   params.push(id)
   if (
-    !(
-      await query(`update category_list set ${items.join()} where id=?`, params)
-    ).changedRows
+    !(await query(`update ad_list set ${items.join()} where id=?`, params))
+      .changedRows
   )
     throw new Error('数据库修改错误')
   return {

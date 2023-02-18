@@ -68,7 +68,6 @@
 
 <script lang="ts" setup>
 import { Discount, Document, Expand, User } from '@element-plus/icons-vue'
-import { useAccount } from 'stores/account'
 const account = useAccount()
 const route = useRoute()
 
@@ -112,6 +111,12 @@ const admin_menu = [
     route: 'article',
     icon: Document,
     children: [{ label: '文章列表', route: 'table' }],
+  },
+  {
+    label: '广告管理',
+    route: 'ad',
+    icon: Document,
+    children: [{ label: '广告列表', route: 'ad' }],
   },
 ]
 const admin_menu_ref = ref()
