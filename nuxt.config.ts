@@ -104,6 +104,6 @@ export default defineNuxtConfig({
     },
   },
   elementPlus: {
-    components: ['ElSubMenu'],
+    components: ['ElSubMenu', 'ElPopperRoot'],
   },
 })

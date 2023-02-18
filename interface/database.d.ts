@@ -105,4 +105,22 @@ namespace DB {
     /** 评论数 */
     comment_count: number
   }
+
+  /**
+   * 广告列表
+   */
+  interface ADList extends WriteAble {
+    /**
+     * 图片
+     */
+    cover_image: string
+    /**
+     * 链接
+     */
+    link: string
+    /**
+     * 是否显示
+     */
+    is_show: boolean
+  }
 }
