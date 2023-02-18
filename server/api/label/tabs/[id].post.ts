@@ -1,5 +1,3 @@
-import { query } from 'server-utils/mysql'
-
 export default defineEventHandler(async event => {
   const id = Number(event.context.params?.id ?? 0)
   const tab = await readBody<RQ.EditTabsLabelPost>(event)

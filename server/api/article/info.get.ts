@@ -1,6 +1,3 @@
-import { query } from 'server-utils/mysql'
-import { dataToJson } from 'server-utils/format'
-
 export default defineEventHandler(async event => {
   const id = getQuery(event).id as string
   const [article] = await query<DB.ArticleList>(

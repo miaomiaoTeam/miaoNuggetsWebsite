@@ -1,6 +1,3 @@
-import { query } from 'server-utils/mysql'
-import { access_redis, refresh_redis, createToken } from 'server-utils/redis'
-
 export default defineEventHandler(async event => {
   const { username, password } = await readBody<RQ.SignInPost>(event)
   const [admin] = await query<Omit<DB.AdminList, 'password'>>(
