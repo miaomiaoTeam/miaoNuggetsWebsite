@@ -48,7 +48,6 @@ export const useAccount = definePiniaStore('account', {
       const {
         data: { access, refresh },
       } = await $fetch('/api/auth/admin/refresh', {
-        method: 'post',
         headers,
       })
       this.token.access = access
