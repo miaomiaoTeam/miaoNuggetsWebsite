@@ -8,4 +8,5 @@ export default <Partial<Config>>{
       postDes: '1140px',
     },
   },
+  plugins: [require('@tailwindcss/typography')],
 }

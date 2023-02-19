@@ -6,18 +6,18 @@
     <div class="pb-3">
       <div
         v-for="toc in tocs"
-        :key="toc.href"
+        :key="toc.id"
         :class="
-          toc.href === activeToc
+          toc.id === activeToc
             ? 'text-[#007fff] p-2 _active relative'
             : 'p-2 relative'
         "
-        @click="hightLightHandler(toc.href)"
+        @click="() => hightLightHandler(toc.id)"
       >
         <a
-          :style="{ marginLeft: marginLeftOffset(toc.tag) }"
-          :href="scrollToPosition(toc.href)"
-          >{{ toc.name }}</a
+          :style="{ marginLeft: marginLeftOffset(toc.depth) }"
+          :href="scrollToPosition(toc.id)"
+          >{{ toc.text }}</a
         >
       </div>
     </div>
@@ -40,6 +40,7 @@ const scrollToPosition = (id: string) => {
 }
 // 实现目录高亮
 const hightLightHandler = (id: string) => {
+  console.log('id', id)
   activeToc.value = id
 }
 // 获取页面中所有h标签距离顶部的位置
@@ -47,7 +48,7 @@ const getHtagHeight = () => {
   const tag: HTMLElement[] = Array.from(document.querySelectorAll('.site'))
   const hTagHeight = []
   for (let i = 0; i < tag.length; i++) {
-    hTagHeight.push(tag[i].offsetTop) // offsetLeft/offsetTop 提供相对于 offsetParent 左上角的 x/y 坐标
+    hTagHeight.push(tag[i].offsetTop - tag[i].offsetHeight) // offsetLeft/offsetTop 提供相对于 offsetParent 左上角的 x/y 坐标
   }
   return hTagHeight
 }
@@ -61,7 +62,8 @@ const scrollHandler = async () => {
   const arr = getHtagHeight()
   for (let i = 0; i < arr.length - 1; i++) {
     if (arr[i] < _scrollTop && arr[i + 1] > _scrollTop) {
-      return (activeToc.value = tocs.value[i]?.href) // 当前页面在位于第i个h标签和第i+1之间时,显示第i个标签对应的目录内容
+      return (activeToc.value = tocs.value[i]?.id)
+      // 当前页面在位于第i个h标签和第i+1之间时,显示第i个标签对应的目录内容
     }
   }
 }

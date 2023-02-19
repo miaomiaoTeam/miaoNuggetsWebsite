@@ -30,12 +30,20 @@
       </div>
       <!-- 文章详情 -->
       <div>
-        <postPreview></postPreview>
+        <!-- <postPreview></postPreview> -->
+        <slot></slot>
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+onMounted(() => {
+  const aArr = document.querySelectorAll('h2,h3,h4,h5,h6')
+  aArr.forEach(item => {
+    item.classList.add('site')
+  })
+})
+</script>
 
 <style scoped></style>

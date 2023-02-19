@@ -74,7 +74,7 @@ watchEffect(async () => {
   const { data } = await useLazyFetch<any>(
     'http://127.0.0.1:4523/m1/2295980-0-default/api/article/alike'
   )
-  console.log('data', data)
+  // console.log('data', data)
   posts.value = data.value?.data
 })
 </script>

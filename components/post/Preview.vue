@@ -39,16 +39,16 @@ onMounted(() => {
     const tocs_catalog: NodeItems = []
     for (let i = 0; i < aArr.length; i++) {
       if (aArr[i].id) {
-        const href = aArr[i].id
-        const name = aArr[i].parentNode.innerText
-        // console.log('aArr[i].parentNode', aArr[i].parentNode)
-        const tag = aArr[i].parentNode.tagName.replace(/H/gi, '')
+        // const href = aArr[i].id
+        // const name = aArr[i].parentNode.innerText
+        // // console.log('aArr[i].parentNode', aArr[i].parentNode)
+        // const tag = aArr[i].parentNode.tagName.replace(/H/gi, '')
         aArr[i].parentNode.classList = 'site'
-        tocs_catalog.push({
-          href,
-          name,
-          tag,
-        })
+        // tocs_catalog.push({
+        //   href,
+        //   name,
+        //   tag,
+        // })
       }
     }
     // console.log('tocs_catalog', tocs_catalog)
