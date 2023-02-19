@@ -1,63 +1,103 @@
 <template>
-  <el-row v-for="item in itemms" :key="item.id" :span="8">
-    <nuxt-link :to="item.link">
-      <el-image :src="item.src" style="width: 240px" />
-    </nuxt-link>
-  </el-row>
-  <el-card class="el-card" style="width: 240px">
-    <el-row class="el-row-card">
-      <el-col :span="6">
-        <el-image class="el-col-image" :src="CardImgSrc" />
-      </el-col>
-      <el-col :span="18">
-        <div class="first-sentence">下载稀土掘金APP</div>
-        <div class="second-sentence">一个帮助开发者成长的社区</div>
-      </el-col>
-    </el-row>
+  <el-card v-if="data" class="w-[240px] mb-[16px]" shadow="never">
+    <template #header>
+      <div class="author-rank">🎖️ 作者榜</div>
+    </template>
+
+    <div v-for="{ author_id, author_info } in data.data" :key="author_id">
+      <div class="author-item">
+        <img
+          class="author-avatar"
+          :src="'https://p3-passport.byteimg.com/img/user-avatar/b9a366997037d998063135bd56302b85~100x100.awebp'"
+          alt="Author Avatar"
+        />
+        <div class="author-info">
+          <div class="author-name">
+            {{ author_info.nickname }}
+            <el-tag>Lv 0</el-tag>
+          </div>
+          <div class="ellipsis">{{ author_info.introduce }}</div>
+        </div>
+      </div>
+    </div>
   </el-card>
 </template>
+
 <script setup lang="ts">
-const itemms = ref([
-  {
-    id: '1',
-    src: 'https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/19295f33a645415fbb8e43c4b194d89e~tplv-k3u1fbpfcp-no-mark:480:400:0:0.awebp?',
-    link: '/',
-  },
-  {
-    id: '2',
-    src: 'https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/19295f33a645415fbb8e43c4b194d89e~tplv-k3u1fbpfcp-no-mark:480:400:0:0.awebp?',
-    link: '/',
-  },
-  {
-    id: '3',
-    src: 'https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/19295f33a645415fbb8e43c4b194d89e~tplv-k3u1fbpfcp-no-mark:480:400:0:0.awebp?',
-    link: '/',
-  },
-])
-const CardImgSrc =
-  'https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/home.59780ae.png'
+// import { ref } from 'vue'
+
+// const itemList = await $fetch('/api/author/rank')
+// const itemList = ref([])
+// watchEffect(async () => {
+//   const { data } = await useLazyFetch('http://localhost:3000/api/author/rank')
+//   console.log('data.value.data', data.value.data)
+//   itemList.value = data.value.data
+// })
+// const url = '../assets/mfer.png'
+
+const { data } = useAsyncData(
+  'TabsLabelList',
+  () =>
+    $fetch('/api/author/rank', {
+      query: { cursor: 0, limit: 5 },
+    })
+  // console.log('data',data)
+)
+
+// onMounted(() => {
+//   watch(data, vals => {
+//     if (vals) itemList.value = vals.data
+//   })
+//   watchEffect(() => console.log(itemList))
+// })
+
+// const itemList = ref([
+//   {
+//     user_id: '1',
+//     avatar: '#assets/ad.webp',
+//     user_name: '小方',
+//     description: 'sssss',
+//   },
+// ])
 </script>
+
 <style scoped>
-.el-card {
-  margin-top: 6px;
-  height: 80px;
-}
-.row-card {
-  margin-top: -6px;
-}
-.el-col-image {
-  margin-top: -9px;
-  margin-left: -10px;
-  height: 50px;
-}
-.first-sentence {
-  margin-top: -8px;
-  font-weight: bold;
+.author-rank {
+  height: 14px;
   font-size: 14px;
+  margin-top: -8px;
 }
-.second-sentence {
-  margin-top: 7px;
+.author-block-title {
+  padding: 0px;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.author-item {
+  display: flex;
+  padding: 0px;
+  cursor: pointer;
+  margin-top: -8px;
+  height: 40px;
+}
+
+.author-avatar {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.author-info {
+  flex: 1 1 auto;
   font-size: 12px;
-  color: #808080;
+  color: #909090;
+  line-height: 1.5;
+  overflow: hidden;
+}
+.author-name {
+  font-size: 15px;
+  color: #262626;
 }
 </style>

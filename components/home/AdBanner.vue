@@ -4,22 +4,18 @@
       <el-image :src="item.src" style="width: 240px" />
     </nuxt-link>
   </el-row>
-  <el-card style="width: 240px">
-    <el-row>
+  <el-card class="el-card" style="width: 240px">
+    <el-row class="el-row-card">
       <el-col :span="6">
-        <el-image :src="CardImgSrc" />
+        <el-image class="el-col-image" :src="CardImgSrc" />
       </el-col>
       <el-col :span="18">
-        <div class="font-bold text-[14px]">下载稀土掘金APP</div>
-        <div class="text-gray-500 text-[12px]">一个帮助开发者成长的社区</div>
-
-        <!-- <h3 style="font-weight: bold; font-size: 14px">下载稀土掘金APP</h3>
-        <h3 style="font-size: 8px">一个帮助开发者成长的社区</h3> -->
+        <div class="first-sentence">下载稀土掘金APP</div>
+        <div class="second-sentence">一个帮助开发者成长的社区</div>
       </el-col>
     </el-row>
   </el-card>
 </template>
-
 <script setup lang="ts">
 const itemms = ref([
   {
@@ -41,3 +37,27 @@ const itemms = ref([
 const CardImgSrc =
   'https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/home.59780ae.png'
 </script>
+<style scoped>
+.el-card {
+  margin-top: 6px;
+  height: 80px;
+}
+.row-card {
+  margin-top: -6px;
+}
+.el-col-image {
+  margin-top: -9px;
+  margin-left: -10px;
+  height: 50px;
+}
+.first-sentence {
+  margin-top: -8px;
+  font-weight: bold;
+  font-size: 14px;
+}
+.second-sentence {
+  margin-top: 7px;
+  font-size: 12px;
+  color: #808080;
+}
+</style>

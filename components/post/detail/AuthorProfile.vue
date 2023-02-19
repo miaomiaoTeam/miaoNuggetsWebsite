@@ -12,7 +12,7 @@
             {{ author_info.nickname }}
             <el-tag>Lv 0</el-tag>
           </div>
-          <div class="text-[12px]">{{ author_info.introduce }}</div>
+          <div class="author-profile">{{ author_info.introduce }}</div>
         </div>
       </div>
     </div>
@@ -56,7 +56,14 @@ const { data } = useAsyncData('TabsLabelList', () =>
   overflow: hidden;
 }
 .author-name {
+  font-weight: bold;
   font-size: 15px;
+  color: #262626;
+}
+
+.author-profile {
+  margin-top: 7px;
+  font-size: 14px;
   color: #262626;
 }
 </style>
