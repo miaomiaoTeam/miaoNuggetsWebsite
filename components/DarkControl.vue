@@ -26,6 +26,4 @@ withDefaults(
 )
 
 const { is_dark, toggle_dark } = useDarkControl()
-
-onMounted(() => console.log('6666'))
 </script>

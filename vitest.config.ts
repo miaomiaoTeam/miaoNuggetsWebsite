@@ -22,6 +22,7 @@ export default defineConfig({
     alias: {
       '@': resolve('.'),
       'server-utils': resolve('./server/utils'),
+      'server-config': resolve('./server/config'),
     },
   },
   plugins: [
