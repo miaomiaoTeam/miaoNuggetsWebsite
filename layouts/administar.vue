@@ -1,0 +1,135 @@
+<template>
+  <ElContainer class="w-screen h-screen">
+    <ElHeader class="flex items-center">
+      <div class="text-xl">
+        <img class="w-[1em] mr-2.5 inline-block" :src="icon" />
+        <span>喵队项目管理系统</span>
+      </div>
+      <div class="flex-auto"></div>
+      <ClientOnly>
+        <ElTag class="mr-2.5" :type="account.has_login ? 'success' : 'info'">
+          {{ account.userinfo?.nickname ?? '尚未登陆' }}
+        </ElTag>
+        <ElButton v-if="account.has_login" @click="account.logout()">
+          退出登录
+        </ElButton>
+      </ClientOnly>
+      <DarkControl />
+    </ElHeader>
+    <ElMain class="!flex flex-row w-full h-[calc(100%-60px)]">
+      <ElMenu
+        ref="admin_menu_ref"
+        class="el-menu-vertical"
+        :collapse="is_menu_collapse"
+        unique-opened
+        router
+        :default-active="route.path"
+        :default-openeds="[route.path.replace(/\/([^/]*)$/, '')]"
+      >
+        <ElMenuItem :index="route.fullPath" @click="toggle_menu_collapse()">
+          <ElIcon>
+            <Expand />
+          </ElIcon>
+          <template #title>
+            <span>{{ is_menu_collapse ? '展开' : '收起' }}</span>
+          </template>
+        </ElMenuItem>
+        <ElSubMenu
+          v-for="top_menu of admin_menu"
+          :key="top_menu.route"
+          :index="'/_admin/' + top_menu.route"
+        >
+          <template #title>
+            <ElIcon>
+              <component :is="top_menu.icon" />
+            </ElIcon>
+            <span>{{ top_menu.label }}</span>
+          </template>
+          <ElMenuItem
+            v-for="child_menu of top_menu.children"
+            :key="child_menu.route"
+            :index="`/_admin/${top_menu.route}/${child_menu.route}`"
+          >
+            {{ child_menu.label }}
+          </ElMenuItem>
+        </ElSubMenu>
+      </ElMenu>
+      <div
+        class="flex-auto pl-5 relative h-full flex flex-col transition-[width] duration-200"
+        :class="
+          is_menu_collapse ? 'w-[calc(100%-64px)]' : 'w-[calc(100%-200px)]'
+        "
+      >
+        <slot />
+      </div>
+    </ElMain>
+  </ElContainer>
+</template>
+
+<script lang="ts" setup>
+import { Discount, Document, Expand, User } from '@element-plus/icons-vue'
+const account = useAccount()
+const route = useRoute()
+
+const icon =
+  'https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/6c61ae65d1c41ae8221a670fa32d05aa.svg'
+
+/** 菜单是否折叠 */
+const is_menu_collapse = useState('admininistar_menu_collapse', () => false)
+onMounted(() => {
+  const admininistar_menu_collapse = useLocalStorage(
+    'admininistar_menu_collapse',
+    false
+  )
+  is_menu_collapse.value = admininistar_menu_collapse.value
+  watch(is_menu_collapse, val => (admininistar_menu_collapse.value = val))
+})
+const toggle_menu_collapse = useToggle(is_menu_collapse)
+
+const admin_menu = [
+  {
+    label: '账号管理',
+    route: 'account',
+    icon: User,
+    children: [
+      { label: '管理员', route: 'admin' },
+      { label: '用户', route: 'user' },
+    ],
+  },
+  {
+    label: '标签管理',
+    route: 'label',
+    icon: Discount,
+    children: [
+      { label: '顶部选项卡', route: 'tabs' },
+      { label: '可关注标签', route: 'follow' },
+      { label: '文章类型', route: 'category' },
+    ],
+  },
+  {
+    label: '文章管理',
+    route: 'article',
+    icon: Document,
+    children: [{ label: '文章列表', route: 'table' }],
+  },
+  {
+    label: '广告管理',
+    route: 'ad',
+    icon: Document,
+    children: [{ label: '广告列表', route: 'ad' }],
+  },
+]
+const admin_menu_ref = ref()
+onMounted(async () => {
+  await nextTick()
+  const index = route.path.replace(/\/([^/]*)$/, '')
+  is_menu_collapse.value || admin_menu_ref.value?.open(index)
+})
+</script>
+
+<style lang="postcss" scoped>
+.el-menu-vertical:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
+}
+</style>
