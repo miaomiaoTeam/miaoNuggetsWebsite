@@ -40,6 +40,7 @@
 </template>
 
 <script setup lang="ts">
+// import { NodeItem } from '@/interface'
 interface postAuthorType {
   id: number
   username: string

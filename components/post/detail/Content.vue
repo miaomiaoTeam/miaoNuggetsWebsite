@@ -2,7 +2,9 @@
   <div class="w-full bg-white">
     <div class="px-[24px] pt-[32px]">
       <!-- 标题 -->
-      <div class="text-[32px] font-semibold leading-[42px] mb-5">标题</div>
+      <div class="text-[32px] font-semibold leading-[42px] mb-5">
+        <slot name="header"></slot>
+      </div>
       <!-- 作者信息 -->
       <div class="flex items-end mb-5">
         <a href="" class="w-[51px] h-10">
@@ -38,7 +40,10 @@
 </template>
 
 <script setup lang="ts">
-onMounted(() => {
+onMounted(async () => {
+  await nextTick()
+  const h1Node: HTMLElement | null = document.querySelector('.prose>h1')
+  if (h1Node) h1Node.style.display = 'none'
   const aArr = document.querySelectorAll('h2,h3,h4,h5,h6')
   aArr.forEach(item => {
     item.classList.add('site')
