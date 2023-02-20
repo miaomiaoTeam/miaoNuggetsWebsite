@@ -13,26 +13,26 @@
     <el-divider />
     <!-- 文章列表 -->
     <div
-      v-for="post in postList.data"
-      :key="post.title"
+      v-for="{ article_id, article_info, author_user_info } in postList"
+      :key="article_id"
       class="px-5 pt-3 mb-[14px]"
     >
       <!-- 作者 -->
       <NuxtLink to="/post">
         <div class="flex items-center">
-          <a href="" class="text-sm">{{ post.author_user_info.nickname }}</a>
+          <a href="" class="text-sm">{{ author_user_info.nickname }}</a>
           <div class="w-[1px] h-[14px] bg-[#e5e6eb] mx-2"></div>
-          <a href="" class="text-sm text-[#909090]">{{
-            post.author_user_info.create_time
-          }}</a>
+          <a href="" class="text-sm text-[#909090]">
+            {{ author_user_info.create_time }}
+          </a>
         </div>
         <!-- 内容 -->
         <div>
           <span class="block text-lg font-bold leading-6 mt-[14px] mb-3">
-            {{ post.article_info.title }}
+            {{ article_info.title }}
           </span>
           <span class="block text-sm text-[#86909c] leading-[22px] mb-[14px]">
-            {{ post.article_info.introduce }}
+            {{ article_info.introduce }}
           </span>
           <!-- 点赞 -->
           <div class="flex">
@@ -64,9 +64,9 @@ const panelList = ref<panelListOption[]>([
   { src: '/svg/page_comment.svg', type: 'badge', data: 178 },
   { src: '/svg/page_collect.svg', type: 'text', data: '收藏' },
 ])
-const { data: postList } = await useFetch(
-  'http://127.0.0.1:4523/m1/2295980-0-default/api/article/recommend'
-)
+const { data: postList } = await $fetch('/api/article/recommend', {
+  query: { cursor: 0, limit: 20 },
+})
 </script>
 <style scoped>
 .el-divider--horizontal {

@@ -56,7 +56,6 @@ const { data } = await useFetch<any>(
   'http://127.0.0.1:4523/m1/2295980-0-default/api/author/rank'
 )
 authorList.value = data.value?.data
-console.log('authorList', authorList)
 // onMounted(() => {
 //   watch(data, vals => {
 //     if (vals) itemList.value = vals.data

@@ -106,7 +106,6 @@ import { useAsyncData } from 'nuxt/app'
 const is_tab_lg = useMediaQuery('(min-width: 1190px)')
 
 const { data: tab_list } = useAsyncData(() => $fetch('/api/label/tabs/list'))
-watchEffect(() => console.log(tab_list))
 
 const is_mean_show = ref(false)
 const toggle_mean_show = useToggle(is_mean_show)

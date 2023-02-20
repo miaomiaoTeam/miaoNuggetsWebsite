@@ -27,9 +27,11 @@ interface ArticleList {
 
 export default defineEventHandler(async event => {
   const { $userinfo } = event.context
-  const { cursor, limit, category } = getQuery(
-    event
-  ) as unknown as RQ.ArticleListGet
+  const {
+    cursor,
+    limit,
+    category = 'all',
+  } = getQuery(event) as unknown as RQ.ArticleListGet
   const category_sql = (category => {
     if (category === 'all') return { sql: '', params: [] }
     if (category === 'follow') {
@@ -48,8 +50,8 @@ export default defineEventHandler(async event => {
     }
   })(category)
   const article_list = await query<DB.ArticleList>(
-    `select * from article_list${category_sql} limit ? offset ?`,
-    [1 * limit, cursor * limit]
+    `select * from article_list${category_sql.sql} limit ? offset ?`,
+    [1 * limit, ...category_sql.params, cursor * limit]
   )
   const data = [] as ArticleList[]
   for (let article_info of article_list) {
