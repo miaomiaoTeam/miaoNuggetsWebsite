@@ -3,116 +3,106 @@
     <header
       class="transition-all ml-4 mr-4 tabSm:ml-8 tabLg:ml-16 h-16 flex items-center"
     >
+      <!-- logo -->
       <NuxtLink
-        href=""
         class="tabSm:flex tabSm:items-center tabSm:mr-2 tabSm:flex-none"
+        to="/"
       >
         <img src="/favicons/favicon-32x32.png" alt="" />
         <p class="hidden tabSm:flex ml-2 w-20 text-xl">稀土掘金</p>
       </NuxtLink>
-
-      <div
-        class="relative flex items-center tabLg:hidden tabLg: mx-4 cursor-pointer"
-        @click="showMeanList"
-      >
-        <div href="" class="text-blue-500">首页</div>
-        <img
-          src="/svg/sanjiao.svg"
-          alt=""
-          class="w-5 h-5 icon"
-          :class="{ active: mean_show == true }"
-        />
-
-        <div
-          v-show="mean_show"
-          class="flex flex-col items-center w-40 absolute border rounded top-8 -left-16 shadow-sm"
+      <!-- 移动端菜单 -->
+      <ClientOnly>
+        <ElPopover
+          v-if="!is_tab_lg"
+          v-model:visible="is_mean_show"
+          placement="bottom"
+          trigger="click"
         >
-          <ul>
-            <li v-for="item in tabList" :key="item.id" class="selectLi">
-              <p>{{ item.label }}</p>
-              <span
-                v-if="item.badge != ''"
-                class="absolute scale-50 top-2 left-0 w-16 bg-red-500 rounded-full text-white text-center"
-              >
-                {{ item.badge }}
-              </span>
+          <template #reference>
+            <div class="flex items-center mx-4 cursor-pointer">
+              <span class="text-blue-500">首页</span>
+              <img
+                src="/svg/sanjiao.svg"
+                class="w-5 h-5 icon"
+                :class="{ active: is_mean_show == true }"
+              />
+            </div>
+          </template>
+          <ul v-if="tab_list" class="menu phone-menu">
+            <li class="menu-item">
+              <NuxtLink to="/" @click="toggle_mean_show(false)">
+                <span
+                  class="tab_label"
+                  :class="{ active: $route.path === '/' }"
+                >
+                  首页
+                </span>
+              </NuxtLink>
             </li>
+            <template v-for="tab in tab_list.data" :key="tab.id">
+              <component
+                :is="tab.link ? 'nav' : 'li'"
+                v-if="tab.is_show && tab.in_menu"
+                class="menu-item"
+              >
+                <NuxtLink :to="tab.link ?? tab.route">
+                  <span
+                    class="tab_label"
+                    :class="{ active: $route.path.startsWith(tab.route) }"
+                  >
+                    {{ tab.label }}
+                    <span v-if="tab.badge" class="tab_badge">
+                      {{ tab.badge }}
+                    </span>
+                  </span>
+                </NuxtLink>
+              </component>
+            </template>
           </ul>
-        </div>
-      </div>
-
-      <ul class="hidden tabLg:flex items-center h-16">
-        <!-- 先暂时这么写 后面api进行配置 -->
-
-        <li
-          v-for="item in tabList"
-          :key="item.id"
-          class="relative h-full flex items-center liBox"
-        >
-          <span
-            v-if="item.badge != ''"
-            class="absolute scale-50 top-2 left-6 w-16 bg-red-500 rounded-full text-white text-center"
-          >
-            {{ item.badge }}
-          </span>
-          <NuxtLink
-            href=""
-            class="h-full flex items-center invisible tabLg: tabLi box-border"
-          >
-            {{ item.label }}
+        </ElPopover>
+      </ClientOnly>
+      <!-- PC端菜单 -->
+      <ul v-if="tab_list" class="hidden tabLg:flex menu h-16">
+        <li class="menu-item">
+          <NuxtLink to="/" @click="toggle_mean_show(false)">
+            <span class="tab_label" :class="{ active: $route.path === '/' }">
+              首页
+            </span>
           </NuxtLink>
-          <!-- </el-badge> -->
         </li>
+        <template v-for="tab in tab_list.data" :key="tab.id">
+          <component
+            :is="tab.link ? 'nav' : 'li'"
+            v-if="tab.is_show"
+            class="menu-item"
+          >
+            <NuxtLink :to="tab.link ?? tab.route">
+              <span
+                class="tab_label"
+                :class="{ active: $route.path.startsWith(tab.route) }"
+              >
+                {{ tab.label }}
+                <span v-if="tab.badge" class="tab_badge">
+                  {{ tab.badge }}
+                </span>
+              </span>
+            </NuxtLink>
+          </component>
+        </template>
       </ul>
     </header>
     <slot />
   </div>
 </template>
 <script setup lang="ts">
-//   $fetch('/api/label/tabs/list', {
-//     method: 'GET',
-//     baseURL: 'http://localhost',
-//   }).then(res => {
-//     tabList.value = res.data
-//     console.log(res)
-//   })
+const is_tab_lg = useMediaQuery('(min-width: 1190px)')
 
-// 这里要改一下
+const { data: tab_list } = useAsyncData(() => $fetch('/api/label/tabs/list'))
+watchEffect(() => console.log(tab_list))
 
-const tabList = ref([
-  {
-    label: '首页',
-    route: '',
-    link: '',
-    badge: '邀请有礼',
-    show: true,
-    menu: true,
-    id: 0,
-  },
-  {
-    label: '首页',
-    route: '',
-    link: '',
-    badge: '邀请有礼',
-    show: true,
-    menu: true,
-    id: 0,
-  },
-  {
-    label: '首页',
-    route: '',
-    link: '',
-    badge: '邀请有礼',
-    show: true,
-    menu: true,
-    id: 0,
-  },
-])
-const mean_show = ref<boolean>(false)
-const showMeanList = () => {
-  mean_show.value = !mean_show.value
-  console.log('mean_show', mean_show.value)
-}
+const is_mean_show = ref(false)
+const toggle_mean_show = useToggle(is_mean_show)
 </script>
 <style scoped>
 /* .tabSmall{
@@ -126,8 +116,48 @@ const showMeanList = () => {
   @apply mx-4 visible text-sm;
 }
 
-.selectLi {
-  @apply relative flex items-center h-16 text-sm;
+.menu {
+  @apply flex items-center;
+}
+
+.phone-menu {
+  @apply bg-white;
+  @apply flex-col;
+}
+.menu .menu-item {
+  @apply relative;
+  @apply flex items-center;
+  @apply h-16;
+  @apply text-sm;
+  @apply cursor-pointer;
+}
+.menu .menu-item a {
+  @apply box-content mx-[1rem];
+  @apply leading-[4rem];
+}
+.menu .menu-item a::before {
+  content: '';
+  @apply absolute left-[1rem] right-[1rem] bottom-0;
+  @apply h-[2px];
+}
+.menu .menu-item a:hover::before {
+  background-color: #1e80ff;
+}
+
+.tab_label {
+  @apply relative;
+}
+.tab_label.active {
+  color: #1e80ff;
+}
+.menu .menu-item a:hover .tab_label {
+  @apply text-black;
+}
+.tab_label .tab_badge {
+  @apply absolute z-10 top-[-20px] left-[10px];
+  @apply bg-red-500 px-[7px] py-[2px] rounded-[50px];
+  @apply scale-50;
+  @apply whitespace-nowrap text-white text-base text-center;
 }
 
 /* .selectBox{
