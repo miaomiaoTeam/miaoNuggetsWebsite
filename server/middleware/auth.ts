@@ -14,6 +14,7 @@ export default defineEventHandler(async event => {
   console.log('New request: ' + event.node.req.url)
   const url = event.node.req.url?.split('?')[0]
   if (url?.startsWith('/api')) {
+    if (url.startsWith('/api/_content')) return
     const token = getHeader(event, 'authentication')
     event.context.$token = token!
     const userinfo = token

@@ -131,7 +131,11 @@ export default defineNuxtPlugin(() => {
             pedding = false
           }
 
-          if (opts.params && typeof opts.params === 'object') {
+          if (
+            !request.startsWith('/api/_content') &&
+            opts.params &&
+            typeof opts.params === 'object'
+          ) {
             for (const [key, val] of Object.entries(opts.params)) {
               if (['string', 'number'].includes(typeof val))
                 request = request.replaceAll(`:${key}`, String(val))
