@@ -24,8 +24,8 @@
           v-for="category of category_list.data"
           :key="category.id"
           class="px-[1rem]"
-          :class="{ active: category_choice === category.alias }"
-          @click="category_choice = category.alias"
+          :class="{ active: category_choice === category.id }"
+          @click="category_choice = category.id"
         >
           {{ category.label }}
         </a>
@@ -50,7 +50,7 @@
 const { data: category_list } = useAsyncData(() =>
   $fetch('/api/label/category/list')
 )
-const category_choice = useState<DB.CategoryList['alias']>(
+const category_choice = useState<DB.CategoryList['id'] | 'all' | 'follow'>(
   'CategoryChoice',
   () => 'all'
 )

@@ -73,6 +73,8 @@ namespace RQ {
   interface ArticleListGet {
     cursor: number
     limit: number
+    category: 'all' | 'follow' | number
+    sort: string
   }
   type EditArticlePost = PickRecord<
     DB.ArticleList,

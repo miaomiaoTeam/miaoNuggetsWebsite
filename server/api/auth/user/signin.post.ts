@@ -1,3 +1,5 @@
+import { jsonToData } from 'server-utils/format/jsondata'
+
 export default defineEventHandler(async event => {
   const { username, password } = await readBody<RQ.SignInPost>(event)
   const [user] = dataToJson.users(

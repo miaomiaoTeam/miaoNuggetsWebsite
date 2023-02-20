@@ -27,9 +27,28 @@ interface ArticleList {
 
 export default defineEventHandler(async event => {
   const { $userinfo } = event.context
-  const { cursor, limit } = getQuery(event) as unknown as RQ.ArticleListGet
+  const { cursor, limit, category } = getQuery(
+    event
+  ) as unknown as RQ.ArticleListGet
+  const category_sql = (category => {
+    if (category === 'all') return { sql: '', params: [] }
+    if (category === 'follow') {
+      if (!$userinfo) return { sql: '', params: [] }
+      const follow_label = Object.keys($userinfo.follow_label)
+      return {
+        sql: ` where category_id in (${new Array(follow_label.length)
+          .fill('?')
+          .join()})`,
+        params: follow_label,
+      }
+    }
+    return {
+      sql: ` where category_id=?`,
+      params: [`id:${category}`],
+    }
+  })(category)
   const article_list = await query<DB.ArticleList>(
-    'select * from article_list limit ? offset ?',
+    `select * from article_list${category_sql} limit ? offset ?`,
     [1 * limit, cursor * limit]
   )
   const data = [] as ArticleList[]
