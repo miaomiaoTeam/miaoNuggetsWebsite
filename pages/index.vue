@@ -39,7 +39,7 @@
       </div>
       <!-- 右侧栏 -->
       <div class="hidden homeLep:block">
-        <postHomeAdBanner :w="240" />
+        <postHomeAdBanner :width="240" />
         <postHomeAuthorRank />
       </div>
     </div>

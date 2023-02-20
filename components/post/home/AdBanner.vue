@@ -1,22 +1,26 @@
 <template>
   <div class="mb-5">
-    <el-row v-for="item in itemms" :key="item.id" :span="8">
-      <a :href="item.link">
-        <el-image :src="item.src" :style="{ width: props.w + 'px' }" />
-      </a>
+    <el-row v-for="ad in ad_list.data" :key="ad.id" :span="8">
+      <NuxtLink :to="ad.link">
+        <ElImage
+          class="ad_img"
+          :src="ad.cover_image"
+          :style="{ width: width + 'px' }"
+        />
+      </NuxtLink>
     </el-row>
-    <div :style="{ width: props.w + 'px' }">
+    <div :style="{ width: width + 'px' }">
       <el-card
         class="box-card"
-        body-style="padding: 0px; background-color: white; "
+        body-style="padding: 0px; background-color: white;"
       >
         <div class="flex p-3">
-          <img :src="CardImgSrc" alt="" class="w-[50px] h-[50px] mr-4" />
+          <img :src="ad_qr" alt="稀土掘金APP" class="w-[50px] h-[50px] mr-4" />
           <div>
-            <div class="text-sm">下载稀土掘金APP</div>
-            <div class="mt-[6px] text-[#808080] text-[12px]">
+            <span class="text-sm">下载稀土掘金APP</span>
+            <span class="mt-[6px] text-[#808080] text-[12px]">
               一个帮助开发者成长的社区
-            </div>
+            </span>
           </div>
         </div>
       </el-card>
@@ -24,44 +28,23 @@
   </div>
 </template>
 <script setup lang="ts">
-const props = withDefaults(
+withDefaults(
   defineProps<{
-    w: number
+    width: number
   }>(),
   {
-    w: 240,
+    width: 240,
   }
 )
-const itemms = ref([
-  {
-    id: '1',
-    src: '/png/adBar.png',
-    link: '/',
-  },
-])
-const CardImgSrc = '/png/adQR.png'
+const ad_list = await $fetch('/api/ad/list')
+const ad_qr = '/png/adQR.png'
 </script>
-<style scoped>
-.el-card {
-  margin-top: 6px;
-  height: 80px;
-}
-.row-card {
-  margin-top: -6px;
-}
-.el-col-image {
-  margin-top: -9px;
-  margin-left: -10px;
-  width: 50px;
-}
-.first-sentence {
-  margin-top: -8px;
-  font-weight: bold;
-  font-size: 14px;
-}
-.second-sentence {
-  margin-top: 7px;
-  font-size: 12px;
-  color: #808080;
+<style lang="postcss" scoped>
+.ad_img::after {
+  content: '广告';
+  @apply absolute right-[1rem] bottom-[1rem] z-10;
+  @apply px-1 bg-[rgba(0,0,0,.2)];
+  @apply border rounded-[5px] border-white;
+  @apply text-white text-xs;
 }
 </style>

@@ -41,12 +41,12 @@ export default defineEventHandler(async event => {
         sql: ` where category_id in (${new Array(follow_label.length)
           .fill('?')
           .join()})`,
-        params: follow_label,
+        params: follow_label.map(tag => Number(tag.replace('id:', ''))),
       }
     }
     return {
       sql: ` where category_id=?`,
-      params: [`id:${category}`],
+      params: [category],
     }
   })(category)
   const article_list = await query<DB.ArticleList>(

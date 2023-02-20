@@ -4,7 +4,7 @@
       :table-data="tabs_list"
       :table-columns="tabs_columns"
       :before-close-drawer="submitTabsLabelPut"
-      editor-request-url="/api/label/tabs/:id"
+      editor-request-url="/api/ad/:id"
       :search-props="['label', 'route', 'link', 'badge']"
       @refresh="refresh()"
       @remove="removeTabs"
