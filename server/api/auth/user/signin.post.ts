@@ -14,7 +14,11 @@ export default defineEventHandler(async event => {
   console.log(user)
   // @ts-ignore
   delete user.password
-  const access = await createToken(access_redis, user, 7 * 24 * 3600)
+  const access = await createToken(
+    access_redis,
+    jsonToData(user),
+    7 * 24 * 3600
+  )
   const refresh = await createToken(
     refresh_redis,
     {

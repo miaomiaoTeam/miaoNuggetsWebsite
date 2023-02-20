@@ -92,7 +92,7 @@ jobs:
       - name: Prepare nuxt environment
         run: pnpm nuxi prepare
 
-      - name: Run eslint
+      - name: Run vue-tsc
         env:
           MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
           MYSQL_PORT: ${{ secrets.MYSQL_PORT }}

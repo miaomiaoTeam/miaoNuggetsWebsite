@@ -7,7 +7,6 @@ interface/auto-imports.d.ts
 interface/components.d.ts
 
 node_modules/
-pnpm-lock.yaml
 
 coverage/
 *.log
