@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-white">
+  <main class="w-full bg-white">
     <!-- 分类栏 -->
     <ul class="flex px-3 py-4">
       <li v-for="item in sortItems" :key="item">
@@ -43,7 +43,7 @@
       </div>
     </div>
     <el-divider />
-  </div>
+  </main>
 </template>
 
 <script setup lang="ts">

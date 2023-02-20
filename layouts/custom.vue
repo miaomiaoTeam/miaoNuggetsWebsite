@@ -1,7 +1,7 @@
 <template>
   <div class="h-16">
     <header
-      class="transition-all ml-4 mr-4 tabSm:ml-8 tabLg:ml-16 h-16 flex items-center"
+      class="transition-all ml-4 mr-4 tabSm:ml-8 tabLg:ml-16 h-16 flex items-center borber-b"
     >
       <!-- logo -->
       <NuxtLink
@@ -102,6 +102,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useAsyncData } from 'nuxt/app'
 const is_tab_lg = useMediaQuery('(min-width: 1190px)')
 
 const { data: tab_list } = useAsyncData(() => $fetch('/api/label/tabs/list'))
@@ -110,7 +111,7 @@ watchEffect(() => console.log(tab_list))
 const is_mean_show = ref(false)
 const toggle_mean_show = useToggle(is_mean_show)
 </script>
-<style scoped>
+<style lang="postcss" scoped>
 .menu {
   @apply flex items-center;
 }
