@@ -31,7 +31,7 @@
       <!-- 文章详情 -->
       <div>
         <!-- <postPreview></postPreview> -->
-        <slot></slot>
+        <slot><postPreview /></slot>
       </div>
     </div>
   </div>

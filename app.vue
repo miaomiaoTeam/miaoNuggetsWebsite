@@ -1,6 +1,8 @@
 <template>
   <ElConfigProvider :locale="zhCn">
-    <NuxtPage />
+    <NuxtLayout :name="layout">
+      <NuxtPage />
+    </NuxtLayout>
   </ElConfigProvider>
 </template>
 
@@ -8,4 +10,5 @@
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import 'dayjs/locale/zh-cn'
 import 'element-plus/theme-chalk/dark/css-vars.css'
+const layout = 'custom'
 </script>
