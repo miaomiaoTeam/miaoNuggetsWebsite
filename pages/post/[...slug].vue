@@ -10,15 +10,19 @@
         <!-- 文章详情 -->
         <div class="flex-1 postDes:ml-[90px]">
           <postDetailContent>
-            <ContentRenderer :value="data">
-              <ContentRendererMarkdown
-                ref="markdown"
-                :value="data"
-                class="prose"
-                excerpt
-              />
-            </ContentRenderer>
-          </postDetailContent>
+            <template #header>
+              <h1>{{ data.title }}</h1>
+            </template>
+            <template #default>
+              <ContentRenderer :value="data">
+                <ContentRendererMarkdown
+                  ref="markdown"
+                  :value="data"
+                  class="prose max-w-none"
+                  excerpt
+                />
+              </ContentRenderer> </template
+          ></postDetailContent>
         </div>
         <!-- 右侧栏 -->
         <div>
@@ -38,13 +42,18 @@
       <!-- 文章详情 -->
       <div class="z-0">
         <postDetailContent>
-          <ContentRenderer :value="data">
-            <ContentRendererMarkdown
-              ref="markdown"
-              :value="data"
-              class="prose max-w-none"
-              excerpt
-            /> </ContentRenderer
+          <template #header>
+            <h1>{{ data.title }}</h1>
+          </template>
+          <template #default>
+            <ContentRenderer :value="data">
+              <ContentRendererMarkdown
+                ref="markdown"
+                :value="data"
+                class="prose max-w-none"
+                excerpt
+              />
+            </ContentRenderer> </template
         ></postDetailContent>
       </div>
     </div>
