@@ -1,20 +1,20 @@
 <template>
   <div class="mb-5">
     <el-row v-for="item in itemms" :key="item.id" :span="8">
-      <nuxt-link :to="item.link">
+      <a :href="item.link">
         <el-image :src="item.src" :style="{ width: props.w + 'px' }" />
-      </nuxt-link>
+      </a>
     </el-row>
     <div :style="{ width: props.w + 'px' }">
       <el-card
         class="box-card"
-        body-style="padding: 12px; background-color: white; "
+        body-style="padding: 0px; background-color: white; "
       >
-        <div class="flex">
-          <img :src="CardImgSrc" alt="" class="w-[50px] mr-4" />
+        <div class="flex p-3">
+          <img :src="CardImgSrc" alt="" class="w-[50px] h-[50px] mr-4" />
           <div>
-            <div>下载稀土掘金APP</div>
-            <div class="mt-[6px] text-[#808080] text-sm">
+            <div class="text-sm">下载稀土掘金APP</div>
+            <div class="mt-[6px] text-[#808080] text-[12px]">
               一个帮助开发者成长的社区
             </div>
           </div>

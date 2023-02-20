@@ -83,6 +83,12 @@ const postList = ref([
     title: '5 个 JavaScript 代码优化技巧',
     desc: '在本文中，将介绍 5 个代码优化的技巧，有助于编写更高效、更优雅的代码。这些技巧包括使用扩展运算符简化代码到使用async/await 处理异步代码等',
   },
+  {
+    author: 'luzilin',
+    time: '2022.3.2',
+    title: '5 个 JavaScript 代码优化技巧',
+    desc: '在本文中，将介绍 5 个代码优化的技巧，有助于编写更高效、更优雅的代码。这些技巧包括使用扩展运算符简化代码到使用async/await 处理异步代码等',
+  },
 ])
 </script>
 <style scoped>
@@ -90,10 +96,5 @@ const postList = ref([
   margin: 3px 0;
   background: 0 0;
   border-top: 1px solid #e8eaec;
-}
-.el-button--text {
-  padding: 0px 1px;
-
-  background-color: #c13030;
 }
 </style>

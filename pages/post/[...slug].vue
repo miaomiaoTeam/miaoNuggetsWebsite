@@ -32,12 +32,20 @@
     <!-- mobile端 -->
     <div class="block postLep:hidden">
       <!-- panel -->
-      <div class="w-full z-10">
+      <div class="w-full z-10 max-w-none">
         <postDetailSuspendPanel />
       </div>
       <!-- 文章详情 -->
       <div class="z-0">
-        <postDetailContent></postDetailContent>
+        <postDetailContent>
+          <ContentRenderer :value="data">
+            <ContentRendererMarkdown
+              ref="markdown"
+              :value="data"
+              class="prose max-w-none"
+              excerpt
+            /> </ContentRenderer
+        ></postDetailContent>
       </div>
     </div>
   </div>
