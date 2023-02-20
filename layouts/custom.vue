@@ -46,7 +46,10 @@
                 v-if="tab.is_show && tab.in_menu"
                 class="menu-item"
               >
-                <NuxtLink :to="tab.link ?? tab.route">
+                <NuxtLink
+                  :to="tab.link ?? tab.route"
+                  :target="tab.link ? '_blank' : null"
+                >
                   <span
                     class="tab_label"
                     :class="{ active: $route.path.startsWith(tab.route) }"
@@ -63,7 +66,7 @@
         </ElPopover>
       </ClientOnly>
       <!-- PC端菜单 -->
-      <ul v-if="tab_list" class="hidden tabLg:flex menu h-16">
+      <ul v-if="tab_list" class="hidden tabLg:flex menu">
         <li class="menu-item">
           <NuxtLink to="/" @click="toggle_mean_show(false)">
             <span class="tab_label" :class="{ active: $route.path === '/' }">
@@ -77,7 +80,10 @@
             v-if="tab.is_show"
             class="menu-item"
           >
-            <NuxtLink :to="tab.link ?? tab.route">
+            <NuxtLink
+              :to="tab.link ?? tab.route"
+              :target="tab.link ? '_blank' : null"
+            >
               <span
                 class="tab_label"
                 :class="{ active: $route.path.startsWith(tab.route) }"
@@ -105,17 +111,6 @@ const is_mean_show = ref(false)
 const toggle_mean_show = useToggle(is_mean_show)
 </script>
 <style scoped>
-/* .tabSmall{
-      @apply invisible
-  }
-  .laptop{
-      @apply  mx-4 visible 
-  } */
-
-.tabLi {
-  @apply mx-4 visible text-sm;
-}
-
 .menu {
   @apply flex items-center;
 }
@@ -160,13 +155,6 @@ const toggle_mean_show = useToggle(is_mean_show)
   @apply whitespace-nowrap text-white text-base text-center;
 }
 
-/* .selectBox{
-      background: pink;
-      width: 10rem;
-     
-      padding: 0.667rem;
-  } */
-/* 以下的代码为了简便我暂时这样写了 */
 .icon {
   fill: #515767;
   transform: rotate(0deg);
@@ -176,9 +164,5 @@ const toggle_mean_show = useToggle(is_mean_show)
   fill: currentColor;
   color: #1e80ff;
   transform: rotate(-180deg);
-}
-
-.tabLi:hover {
-  border-bottom: 2px solid #1e80ff;
 }
 </style>
