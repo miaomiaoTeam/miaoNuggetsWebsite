@@ -26,7 +26,8 @@ export default defineEventHandler(async event => {
       userinfo.id = Number(userinfo.id)
       if (userinfo.role === 'admin') event.context.$admininfo = userinfo
       else if (userinfo.role === 'none' || userinfo.role === 'author')
-        event.context.$userinfo = userinfo
+        // @ts-ignore
+        event.context.$userinfo = dataToJson.user(userinfo)
     }
     if (white_list.has(url)) return
     if (!token || typeof token !== 'string')
