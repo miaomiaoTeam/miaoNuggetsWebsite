@@ -63,6 +63,7 @@
 import { NodeItem } from '@/stores/api/catalog'
 import type { NodeItems } from '@/stores/api/catalog'
 import { useCatalogStore } from '@/stores/catalog'
+
 // 扁平化数组对象
 function extractTree(arrs: NodeItems, childs: string) {
   const attrList: string[] = Object.keys(arrs[0]) // 存储数组对象的key

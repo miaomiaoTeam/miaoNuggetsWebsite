@@ -17,6 +17,7 @@
       v-for="{ article_id, article_info, author_user_info } in postList?.data"
       :key="article_id"
       class="px-5 pt-3 mb-[14px] hover:bg-[#fafafa]"
+      @click="() => store.setPostId(article_id)"
     >
       <!-- 作者 -->
       <NuxtLink :to="article_info.content_path">
@@ -68,6 +69,9 @@
 </template>
 
 <script setup lang="ts">
+import { usePostStore } from '@/stores/post/post_detail'
+const store = usePostStore()
+
 const navList = ref<string[]>(['推荐', '最新', '热榜'])
 
 const { data: postList } = await useAsyncData('post_list', () =>
@@ -75,12 +79,15 @@ const { data: postList } = await useAsyncData('post_list', () =>
     query: { cursor: 0, limit: 20, sort: navList_choice.value },
   })
 )
-const navList_choice = ref<string>()
+const navList_choice = ref<string>('推荐')
 const refresh = () => refreshNuxtData('post_list')
 const clickHandler = (item: string | undefined) => {
-  navList_choice.value = item
+  navList_choice.value = item ?? ''
   refresh()
 }
+onMounted(() => {
+  refresh()
+})
 // const refresh = () => refreshNuxtData('count')
 // const { data: postList } = await $fetch('/api/article/recommend', {
 //   query: { cursor: 0, limit: 20 },

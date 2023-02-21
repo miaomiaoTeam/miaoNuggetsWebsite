@@ -1,6 +1,6 @@
 <template>
   <el-card
-    v-if="authorList"
+    v-if="author_list"
     class="box-card w-[240px] mb-[16px]"
     shadow="never"
     body-style="padding: 0px; background-color: white; "
@@ -9,7 +9,7 @@
       <div class="text-[14px]">🎖️ 作者榜</div>
     </template>
 
-    <div v-for="author in authorList" :key="author.id">
+    <div v-for="author in author_list.data" :key="author.author_id">
       <div class="author-item py-3 px-4">
         <img
           class="author-avatar"
@@ -18,17 +18,24 @@
         />
         <div class="author-info">
           <div class="author-name">
-            {{ author.username }}
+            {{ author.author_info.nickname }}
             <el-tag>Lv 0</el-tag>
           </div>
-          <div class="ellipsis">{{ author.introduce }}</div>
+          <div class="ellipsis">{{ author.author_info.introduce }}</div>
         </div>
       </div>
     </div>
   </el-card>
+  <div></div>
 </template>
 
 <script setup lang="ts">
+const { data: author_list } = await useAsyncData('author_list', () =>
+  $fetch('/api/author/rank', {
+    query: { cursor: 0, limit: 5 },
+  })
+)
+console.log('author_list', author_list)
 // import { ref } from 'vue'
 // const itemList = await $fetch('/api/author/rank')
 // const itemList = ref([])
@@ -46,16 +53,16 @@
 //     })
 //   console.log('data',data)
 // )
-interface postAuthorType {
-  id: number
-  username: string
-  introduce: number
-}
-const authorList = ref<postAuthorType[]>([])
-const { data } = await useFetch<any>(
-  'http://127.0.0.1:4523/m1/2295980-0-default/api/author/rank'
-)
-authorList.value = data.value?.data
+// interface postAuthorType {
+//   id: number
+//   username: string
+//   introduce: number
+// }
+// const authorList = ref<postAuthorType[]>([])
+// const { data } = await useFetch<any>(
+//   'http://127.0.0.1:4523/m1/2295980-0-default/api/author/rank'
+// )
+// authorList.value = data.value?.data
 // onMounted(() => {
 //   watch(data, vals => {
 //     if (vals) itemList.value = vals.data
