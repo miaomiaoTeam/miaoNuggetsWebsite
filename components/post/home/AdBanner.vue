@@ -18,7 +18,9 @@
           <img :src="ad_qr" alt="稀土掘金APP" class="w-[50px] h-[50px] mr-4" />
           <div>
             <span class="text-sm">下载稀土掘金APP</span>
-            <span class="mt-[6px] text-[#808080] text-[12px]">
+
+            <span class="mt-[6px] text-[#808080] text-[12px]"
+              ><br />
               一个帮助开发者成长的社区
             </span>
           </div>

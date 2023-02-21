@@ -27,7 +27,7 @@
         <!-- 右侧栏 -->
         <div>
           <PostDetailAuthorProfile />
-          <postHomeAdBanner :w="300" />
+          <postHomeAdBanner :width="300" />
           <PostRelated />
           <postDetailCatalog />
         </div>

@@ -4,7 +4,7 @@
       <template #header>
         <div>相关文章</div>
       </template>
-      <div v-for="post in posts" :key="post.id" class="mb-[8px]">
+      <div v-for="post in post_List?.data" :key="post.id" class="mb-[8px]">
         <a
           href=""
           class="text-[14px] font-normal text-[#252933] leading-[22px] hover:text-[#1e80ff]"
@@ -63,20 +63,25 @@
 //   },
 //   { immediate: true }
 // )
-interface postType {
-  id: number
-  title: string
-  collect_count: number
-  comment_count: number
-}
-const posts = ref<postType[]>([])
-watchEffect(async () => {
-  const { data } = await useLazyFetch<any>(
-    'http://127.0.0.1:4523/m1/2295980-0-default/api/article/alike'
-  )
-  // console.log('data', data)
-  posts.value = data.value?.data
-})
+// interface postType {
+//   id: number
+//   title: string
+//   collect_count: number
+//   comment_count: number
+// }
+// const posts = ref<postType[]>([])
+// watchEffect(async () => {
+//   const { data } = await useLazyFetch<any>(
+//     'http://127.0.0.1:4523/m1/2295980-0-default/api/article/alike'
+//   )
+//   // console.log('data', data)
+//   posts.value = data.value?.data
+// })
+const { data: post_List } = await useAsyncData('post_list', () =>
+  $fetch('/api/article/alike', {
+    query: { id: 3 },
+  })
+)
 </script>
 
 <style scoped></style>

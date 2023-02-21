@@ -72,7 +72,7 @@ const navList = ref<string[]>(['推荐', '最新', '热榜'])
 
 const { data: postList } = await useAsyncData('post_list', () =>
   $fetch('/api/article/recommend', {
-    query: { cursor: 0, limit: 20 },
+    query: { cursor: 0, limit: 20, sort: navList_choice.value },
   })
 )
 const navList_choice = ref<string>()
