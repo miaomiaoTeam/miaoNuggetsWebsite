@@ -5,11 +5,18 @@
       <div class="flex max-w-[1140px] mx-auto postLep:gap-5">
         <!-- 悬浮panel -->
         <div class="postDes:mr-[-20px]">
-          <postDetailSuspendPanel />
+          <postDetailSuspendPanel
+            :digg-count="post_info?.data?.digg_count ?? 0"
+            :comment-count="post_info?.data?.comment_count ?? 0"
+          />
         </div>
         <!-- 文章详情 -->
         <div class="flex-1 postDes:ml-[90px]">
-          <postDetailContent>
+          <postDetailContent
+            :create-time="post_info?.data?.create_time ?? new Date()"
+            :view-count="post_info?.data?.view_count ?? 0"
+            :nick-name="author_info?.data?.nickname ?? ''"
+          >
             <template #header>
               <h1>{{ data.title }}</h1>
             </template>
@@ -26,7 +33,12 @@
         </div>
         <!-- 右侧栏 -->
         <div>
-          <PostDetailAuthorProfile />
+          <PostDetailAuthorProfile
+            :intro-duce="author_info?.data?.introduce ?? ''"
+            :nick-name="author_info?.data?.nickname ?? ''"
+            :be-liked="author_info?.data?.be_liked ?? 0"
+            :be-viewed="author_info?.data?.be_viewed ?? 0"
+          />
           <postHomeAdBanner :width="300" />
           <PostRelated />
           <postDetailCatalog />
@@ -37,11 +49,18 @@
     <div class="block postLep:hidden">
       <!-- panel -->
       <div class="w-full z-10 max-w-none">
-        <postDetailSuspendPanel />
+        <postDetailSuspendPanel
+          :digg-count="post_info?.data?.digg_count ?? 0"
+          :comment-count="post_info?.data?.comment_count ?? 0"
+        />
       </div>
       <!-- 文章详情 -->
       <div class="z-0">
-        <postDetailContent>
+        <postDetailContent
+          :create-time="post_info?.data?.create_time ?? new Date()"
+          :view-count="post_info?.data?.view_count ?? 0"
+          :nick-name="author_info?.data?.nickname ?? ''"
+        >
           <template #header>
             <h1>{{ data.title }}</h1>
           </template>
@@ -60,10 +79,27 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia'
 import { NodeItem } from '@/stores/api/catalog'
 import type { NodeItems } from '@/stores/api/catalog'
 import { useCatalogStore } from '@/stores/catalog'
-
+import { usePostStore } from '@/stores/post/post_detail'
+const catalog = useCatalogStore()
+const route = useRoute()
+const postStore = usePostStore()
+const { post_id } = storeToRefs(postStore)
+// 获取指定文章信息
+const { data: post_info } = await useAsyncData('post_info', () =>
+  $fetch('/api/article/info', {
+    query: { id: post_id.value },
+  })
+)
+// 获取指定文章作者信息
+const { data: author_info } = await useAsyncData('author_info', () =>
+  $fetch('/api/article/author', {
+    query: { id: post_id.value },
+  })
+)
 // 扁平化数组对象
 function extractTree(arrs: NodeItems, childs: string) {
   const attrList: string[] = Object.keys(arrs[0]) // 存储数组对象的key
@@ -87,8 +123,6 @@ function extractTree(arrs: NodeItems, childs: string) {
   }
   return getObj(arrs)
 }
-const catalog = useCatalogStore()
-const route = useRoute()
 const markdown = ref()
 const tocs = ref<NodeItems>([])
 const { data } = await useAsyncData<any>('page-data', () =>

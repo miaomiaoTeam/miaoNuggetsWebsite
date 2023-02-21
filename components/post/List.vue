@@ -17,7 +17,7 @@
       v-for="{ article_id, article_info, author_user_info } in postList?.data"
       :key="article_id"
       class="px-5 pt-3 mb-[14px] hover:bg-[#fafafa]"
-      @click="() => store.setPostId(article_id)"
+      @click="() => store.setPostId(article_id, author_user_info.id)"
     >
       <!-- 作者 -->
       <NuxtLink :to="article_info.content_path">

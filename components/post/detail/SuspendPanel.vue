@@ -5,7 +5,7 @@
       <ul>
         <li v-for="(item, index) in panelList_pc" :key="index">
           <div v-if="item.type === 'badge'">
-            <el-badge :value="item.data" class="item" type="primary" :max="199">
+            <el-badge :value="item.data" class="item" type="primary" :max="999">
               <el-button class="btn">
                 <img :src="item.src ?? ''" class="w-8"
               /></el-button>
@@ -56,6 +56,17 @@ const panelList = ref<panelListOption[]>([
   { src: '/svg/page_comment.svg', type: 'badge', data: 178 },
   { src: '/svg/page_collect.svg', type: 'text', data: '收藏' },
 ])
+const props = defineProps<{
+  diggCount: number
+  commentCount: number
+}>()
+console.log('props', props)
+watchEffect(() => {
+  panelList_pc.value[0].data = props.diggCount
+  panelList_pc.value[1].data = props.commentCount
+  panelList.value[0].data = props.diggCount
+  panelList.value[1].data = props.commentCount
+})
 </script>
 <style scoped>
 .btn {

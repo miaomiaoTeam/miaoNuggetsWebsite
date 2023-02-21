@@ -15,7 +15,7 @@
         /></a>
         <div class="flex-1">
           <div class="text-base font-medium text-[#515767]">
-            张三_北京
+            {{ props.nickName }}
             <img
               src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/lv-6.b69935b.png"
               alt=""
@@ -23,12 +23,11 @@
             />
           </div>
           <div class="text-sm text-[#8a919f]">
-            2022年11月22日 11:06 · 阅读 47860
+            <span>{{ formateDate }} · </span>
+            <span>阅读 {{ props.viewCount }}</span>
           </div>
         </div>
-        <div>
-          <elButton type="primary" plain> + 关注</elButton>
-        </div>
+        <div></div>
       </div>
       <!-- 文章详情 -->
       <div>
@@ -40,6 +39,17 @@
 </template>
 
 <script setup lang="ts">
+const props = defineProps<{
+  nickName: string
+  createTime: Date
+  viewCount: number
+}>()
+// 格式化时间
+const formateDate = computed(() => {
+  return `${new Date(props.createTime).getMonth() + 1}月${new Date(
+    props.createTime
+  ).getDate()}日`
+})
 onMounted(async () => {
   await nextTick()
   const h1Node: HTMLElement | null = document.querySelector('.prose>h1')
