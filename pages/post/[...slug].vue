@@ -91,7 +91,7 @@ const route = useRoute()
 const markdown = ref()
 const tocs = ref<NodeItems>([])
 const { data } = await useAsyncData<any>('page-data', () =>
-  queryContent('/docs/standards/git').findOne()
+  queryContent(`${Array.from(route.params.slug).join('/')}`).findOne()
 )
 onMounted(() => {
   tocs.value = [...markdown.value.value.body.toc.links]
@@ -100,5 +100,5 @@ onMounted(() => {
   // console.log('tocs.value', tocs.value)
   // console.log('markdown.value', markdown.value)
 })
-console.log('route.params.id', route.params.slug)
+// console.log('route.params.id', Array.from(route.params.slug).join('/'))
 </script>
