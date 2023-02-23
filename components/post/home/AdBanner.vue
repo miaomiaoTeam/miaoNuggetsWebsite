@@ -41,10 +41,10 @@ withDefaults(
 const ad_list = await $fetch('/api/ad/list')
 const ad_qr = '/png/adQR.png'
 </script>
-<style lang="postcss" scoped>
+<style scoped>
 .ad_img::after {
   content: '广告';
-  @apply absolute right-[1rem] bottom-[1rem] z-10;
+  @apply absolute right-[1rem] bottom-[1rem];
   @apply px-1 bg-[rgba(0,0,0,.2)];
   @apply border rounded-[5px] border-white;
   @apply text-white text-xs;

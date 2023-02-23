@@ -1,103 +1,109 @@
 <template>
-  <div class="h-16">
-    <header
-      class="transition-all ml-4 mr-4 tabSm:ml-8 tabLg:ml-16 h-16 flex items-center borber-b"
+  <div class="bg-[#f4f5f5]">
+    <div
+      :class="{ _disappear: !isNavShow, _appear: isNavShow }"
+      class="fixed top-0 left-0 right-0 z-20 h-[60px] bg-white"
     >
-      <!-- logo -->
-      <NuxtLink
-        class="tabSm:flex tabSm:items-center tabSm:mr-2 tabSm:flex-none"
-        to="/"
+      <header
+        class="transition-all ml-4 mr-4 tabSm:ml-8 tabLg:ml-16 flex items-center borber-b"
       >
-        <img src="/favicons/favicon-32x32.png" alt="" />
-        <p class="hidden tabSm:flex ml-2 w-20 text-xl">稀土掘金</p>
-      </NuxtLink>
-      <!-- 移动端菜单 -->
-      <ClientOnly>
-        <ElPopover
-          v-if="!is_tab_lg"
-          v-model:visible="is_mean_show"
-          placement="bottom"
-          trigger="click"
+        <!-- logo -->
+        <NuxtLink
+          class="tabSm:flex tabSm:items-center tabSm:mr-2 tabSm:flex-none"
+          to="/"
         >
-          <template #reference>
-            <div class="flex items-center mx-4 cursor-pointer">
-              <span class="text-blue-500">首页</span>
-              <img
-                src="/svg/sanjiao.svg"
-                class="w-5 h-5 icon"
-                :class="{ active: is_mean_show == true }"
-              />
-            </div>
-          </template>
-          <ul v-if="tab_list" class="menu phone-menu">
-            <li class="menu-item">
-              <NuxtLink to="/" @click="toggle_mean_show(false)">
-                <span
-                  class="tab_label"
-                  :class="{ active: $route.path === '/' }"
-                >
-                  首页
-                </span>
-              </NuxtLink>
-            </li>
-            <template v-for="tab in tab_list.data" :key="tab.id">
-              <component
-                :is="tab.link ? 'nav' : 'li'"
-                v-if="tab.is_show && tab.in_menu"
-                class="menu-item"
-              >
-                <NuxtLink
-                  :to="tab.link ?? tab.route"
-                  :target="tab.link ? '_blank' : null"
-                >
+          <img src="/favicons/favicon-32x32.png" alt="" />
+          <p class="hidden tabSm:flex ml-2 w-20 text-xl">稀土掘金</p>
+        </NuxtLink>
+        <!-- 移动端菜单 -->
+        <ClientOnly>
+          <ElPopover
+            v-if="!is_tab_lg"
+            v-model:visible="is_mean_show"
+            placement="bottom"
+            trigger="click"
+          >
+            <template #reference>
+              <div class="flex items-center mx-4 cursor-pointer">
+                <span class="text-blue-500">首页</span>
+                <img
+                  src="/svg/sanjiao.svg"
+                  class="w-5 h-5 icon"
+                  :class="{ active: is_mean_show == true }"
+                />
+              </div>
+            </template>
+            <ul v-if="tab_list" class="menu phone-menu">
+              <li class="menu-item">
+                <NuxtLink to="/" @click="toggle_mean_show(false)">
                   <span
                     class="tab_label"
-                    :class="{ active: $route.path.startsWith(tab.route) }"
+                    :class="{ active: $route.path === '/' }"
                   >
-                    {{ tab.label }}
-                    <span v-if="tab.badge" class="tab_badge">
-                      {{ tab.badge }}
-                    </span>
+                    首页
                   </span>
                 </NuxtLink>
-              </component>
-            </template>
-          </ul>
-        </ElPopover>
-      </ClientOnly>
-      <!-- PC端菜单 -->
-      <ul v-if="tab_list" class="hidden tabLg:flex menu">
-        <li class="menu-item">
-          <NuxtLink to="/" @click="toggle_mean_show(false)">
-            <span class="tab_label" :class="{ active: $route.path === '/' }">
-              首页
-            </span>
-          </NuxtLink>
-        </li>
-        <template v-for="tab in tab_list.data" :key="tab.id">
-          <component
-            :is="tab.link ? 'nav' : 'li'"
-            v-if="tab.is_show"
-            class="menu-item"
-          >
-            <NuxtLink
-              :to="tab.link ?? tab.route"
-              :target="tab.link ? '_blank' : null"
-            >
-              <span
-                class="tab_label"
-                :class="{ active: $route.path.startsWith(tab.route) }"
-              >
-                {{ tab.label }}
-                <span v-if="tab.badge" class="tab_badge">
-                  {{ tab.badge }}
-                </span>
+              </li>
+              <template v-for="tab in tab_list.data" :key="tab.id">
+                <component
+                  :is="tab.link ? 'nav' : 'li'"
+                  v-if="tab.is_show && tab.in_menu"
+                  class="menu-item"
+                >
+                  <NuxtLink
+                    :to="tab.link ?? tab.route"
+                    :target="tab.link ? '_blank' : null"
+                  >
+                    <span
+                      class="tab_label"
+                      :class="{ active: $route.path.startsWith(tab.route) }"
+                    >
+                      {{ tab.label }}
+                      <span v-if="tab.badge" class="tab_badge">
+                        {{ tab.badge }}
+                      </span>
+                    </span>
+                  </NuxtLink>
+                </component>
+              </template>
+            </ul>
+          </ElPopover>
+        </ClientOnly>
+        <!-- PC端菜单 -->
+        <ul v-if="tab_list" class="hidden tabLg:flex menu">
+          <li class="menu-item">
+            <NuxtLink to="/" @click="toggle_mean_show(false)">
+              <span class="tab_label" :class="{ active: $route.path === '/' }">
+                首页
               </span>
             </NuxtLink>
-          </component>
-        </template>
-      </ul>
-    </header>
+          </li>
+          <template v-for="tab in tab_list.data" :key="tab.id">
+            <component
+              :is="tab.link ? 'nav' : 'li'"
+              v-if="tab.is_show"
+              class="menu-item"
+            >
+              <NuxtLink
+                :to="tab.link ?? tab.route"
+                :target="tab.link ? '_blank' : null"
+              >
+                <span
+                  class="tab_label"
+                  :class="{ active: $route.path.startsWith(tab.route) }"
+                >
+                  {{ tab.label }}
+                  <span v-if="tab.badge" class="tab_badge">
+                    {{ tab.badge }}
+                  </span>
+                </span>
+              </NuxtLink>
+            </component>
+          </template>
+        </ul>
+      </header>
+      <el-divider />
+    </div>
     <slot />
   </div>
 </template>
@@ -109,8 +115,30 @@ const { data: tab_list } = useAsyncData(() => $fetch('/api/label/tabs/list'))
 
 const is_mean_show = ref(false)
 const toggle_mean_show = useToggle(is_mean_show)
+
+const isNavShow = ref(true)
+// 获取当前已从顶部滚动的距离
+const getPageTop = () => {
+  return window.pageYOffset
+}
+const throttledFn = useThrottleFn(() => {
+  console.log('getPageTop', getPageTop())
+  if (getPageTop() > 400) isNavShow.value = false
+  else isNavShow.value = true
+}, 200)
+onMounted(() => {
+  window.addEventListener('scroll', throttledFn)
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', throttledFn)
+})
 </script>
-<style lang="postcss" scoped>
+<style scoped>
+.el-divider--horizontal {
+  margin: 3px 0;
+  background: 0 0;
+  border-top: 1px solid #e8eaec;
+}
 .menu {
   @apply flex items-center;
 }
@@ -164,5 +192,31 @@ const toggle_mean_show = useToggle(is_mean_show)
   fill: currentColor;
   color: #1e80ff;
   transform: rotate(-180deg);
+}
+._disappear {
+  animation: disappear 0.1s;
+  animation-fill-mode: forwards;
+  animation-delay: 0;
+}
+._appear {
+  animation: appear 1s;
+  animation-fill-mode: forwards;
+  animation-delay: 0;
+}
+@keyframes disappear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 </style>
